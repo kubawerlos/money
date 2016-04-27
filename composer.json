@@ -1,0 +1,28 @@
+{
+    "name": "kubawerlos/money",
+    "type": "library",
+    "description": "Simple implementation of Money Value Object",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kuba Werłos",
+            "email": "werlos@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "KubaWerlos\\Money\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "symfony/intl": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=5.2"
+    },
+    "config": {
+        "bin-dir": "bin",
+        "optimize-autoloader": true
+    }
+}

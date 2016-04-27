@@ -1,0 +1,4 @@
+/bin/
+/tests-results/
+/vendor/
+/composer.lock
