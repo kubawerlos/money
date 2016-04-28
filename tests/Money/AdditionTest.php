@@ -9,7 +9,7 @@ use KubaWerlos\Money\Money;
  * @covers \KubaWerlos\Money\Money::add
  * @covers \KubaWerlos\Money\Money::calculate
  */
-class AddTest extends \PHPUnit_Framework_TestCase
+class AdditionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctAdditionProvider
@@ -125,7 +125,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\RangeException::class);
 
-        $money = Money::create((int) (PHP_INT_MAX / 101), new Currency('USD'));
+        $money = Money::create((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
         $money->add($money);
     }
 }

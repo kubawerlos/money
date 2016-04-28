@@ -9,7 +9,7 @@ use KubaWerlos\Money\Money;
  * @covers \KubaWerlos\Money\Money::subtract
  * @covers \KubaWerlos\Money\Money::calculate
  */
-class SubtractTest extends \PHPUnit_Framework_TestCase
+class SubtractionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctSubtractionProvider
@@ -115,7 +115,7 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\RangeException::class);
 
-        Money::create((int) (PHP_INT_MIN / 101), new Currency('USD'))
-            ->subtract(Money::create((int) (PHP_INT_MAX / 101), new Currency('USD')));
+        Money::create((int) (100 - PHP_INT_MAX / 100), new Currency('USD'))
+            ->subtract(Money::create((int) (PHP_INT_MAX / 100 - 100), new Currency('USD')));
     }
 }

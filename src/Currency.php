@@ -10,7 +10,7 @@ final class Currency
     private $code;
 
     /** @var int */
-    private $fractionDigits = null;
+    private $fractionDigits;
 
     /**
      * @param string $code

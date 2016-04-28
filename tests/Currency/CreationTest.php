@@ -1,24 +1,23 @@
 <?php
 
-namespace Tests;
+namespace Tests\Currency;
 
 use KubaWerlos\Money\Currency;
-use Symfony\Component\Intl\Intl;
 
 /**
  * @covers \KubaWerlos\Money\Currency::__construct
  * @covers \KubaWerlos\Money\Currency::<private>
  */
-class CurrencyCreateTest extends \PHPUnit_Framework_TestCase
+class CreationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider validCurrencyProvider
-     * @param string $currencyCode
+     * @param string $code
      * @test
      */
-    public function validCurrency($currencyCode)
+    public function validCurrency($code)
     {
-        $this->assertInstanceOf(Currency::class, new Currency($currencyCode));
+        $this->assertInstanceOf(Currency::class, new Currency($code));
     }
 
     /**
@@ -36,13 +35,13 @@ class CurrencyCreateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider invalidCurrencyProvider
-     * @param mixed $currencyCode
+     * @param mixed $code
      * @test
      */
-    public function invalidCurrency($currencyCode)
+    public function invalidCurrency($code)
     {
         $this->expectException(\InvalidArgumentException::class);
-        new Currency($currencyCode);
+        new Currency($code);
     }
 
     /**

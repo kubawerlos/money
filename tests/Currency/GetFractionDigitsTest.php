@@ -1,14 +1,13 @@
 <?php
 
-namespace Tests;
+namespace Tests\Currency;
 
 use KubaWerlos\Money\Currency;
-use Symfony\Component\Intl\Intl;
 
 /**
  * @covers \KubaWerlos\Money\Currency::getFractionDigits
  */
-class CurrencyGetFractionDigitsTest extends \PHPUnit_Framework_TestCase
+class GetFractionDigitsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getFractionDigitsProvider
@@ -27,22 +26,10 @@ class CurrencyGetFractionDigitsTest extends \PHPUnit_Framework_TestCase
     public function getFractionDigitsProvider()
     {
         return [
-            [
-                2,
-                new Currency('USD'),
-            ],
-            [
-                2,
-                new Currency('EUR'),
-            ],
-            [
-                2,
-                new Currency('PLN'),
-            ],
-            [
-                0,
-                new Currency('HUF'),
-            ],
+            [ 2, new Currency('USD') ],
+            [ 2, new Currency('EUR') ],
+            [ 2, new Currency('PLN') ],
+            [ 0, new Currency('HUF') ],
         ];
     }
 }
