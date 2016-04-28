@@ -28,11 +28,9 @@ class CreateTest extends \PHPUnit_Framework_TestCase
     public function validMoneyProvider()
     {
         return [
-            [ 0, new Currency('USD') ],
             [ '0', new Currency('USD') ],
             [ 0.0, new Currency('USD') ],
             [ '0.0', new Currency('USD') ],
-            [ 1000, new Currency('EUR') ],
             [ '1000', new Currency('EUR') ],
             [ 1.99, new Currency('PLN') ],
             [ '1.99', new Currency('PLN') ],
@@ -65,20 +63,13 @@ class CreateTest extends \PHPUnit_Framework_TestCase
             [ null, new Currency('USD') ],
             [ true, new Currency('USD') ],
             [ false, new Currency('USD') ],
-            [ [1, 2], new Currency('USD') ],
             [ '', new Currency('USD') ],
-            [ 123.456, new Currency('USD') ],
             [ 2.5, new Currency('HUF') ],
             [ -12.345, new Currency('TRY') ],
-            [ '7 Dollars', new Currency('USD') ],
             [ '01', new Currency('USD') ],
-            [ '00.5', new Currency('USD') ],
             [ '0.500', new Currency('USD') ],
             [ '10.', new Currency('USD') ],
-            [ '10.2', new Currency('HUF') ],
-            [ '1/2', new Currency('USD') ],
             [ '5,5', new Currency('USD') ],
-            [ sqrt(-1), new Currency('USD') ],
         ];
     }
 }
