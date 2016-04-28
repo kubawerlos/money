@@ -29,19 +29,19 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                new Money(4, new Currency('USD')),
-                new Money(2, new Currency('USD')),
-                new Money(2, new Currency('USD')),
+                Money::create(4, new Currency('USD')),
+                Money::create(2, new Currency('USD')),
+                Money::create(2, new Currency('USD')),
             ],
             [
-                new Money(5.55, new Currency('USD')),
-                new Money(5.55, new Currency('USD')),
-                new Money(0, new Currency('USD')),
+                Money::create(5.55, new Currency('USD')),
+                Money::create(5.55, new Currency('USD')),
+                Money::create(0, new Currency('USD')),
             ],
             [
-                new Money(3.33, new Currency('USD')),
-                new Money(2.22, new Currency('USD')),
-                new Money(1.11, new Currency('USD')),
+                Money::create(3.33, new Currency('USD')),
+                Money::create(2.22, new Currency('USD')),
+                Money::create(1.11, new Currency('USD')),
             ],
         ];
     }
@@ -65,14 +65,14 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                new Money(5, new Currency('USD')),
-                new Money(2, new Currency('USD')),
-                new Money(2, new Currency('USD')),
+                Money::create(5, new Currency('USD')),
+                Money::create(2, new Currency('USD')),
+                Money::create(2, new Currency('USD')),
             ],
             [
-                new Money(3.50, new Currency('USD')),
-                new Money(2.50, new Currency('USD')),
-                new Money(1.50, new Currency('USD')),
+                Money::create(3.50, new Currency('USD')),
+                Money::create(2.50, new Currency('USD')),
+                Money::create(1.50, new Currency('USD')),
             ],
         ];
     }
@@ -97,14 +97,14 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                new Money(2, new Currency('EUR')),
-                new Money(2, new Currency('USD')),
-                new Money(4, new Currency('USD')),
+                Money::create(2, new Currency('EUR')),
+                Money::create(2, new Currency('USD')),
+                Money::create(4, new Currency('USD')),
             ],
             [
-                new Money(2, new Currency('USD')),
-                new Money(2, new Currency('EUR')),
-                new Money(4, new Currency('USD')),
+                Money::create(2, new Currency('USD')),
+                Money::create(2, new Currency('EUR')),
+                Money::create(4, new Currency('USD')),
             ],
         ];
     }
@@ -116,7 +116,7 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\OverflowException::class);
 
-        (new Money(-20, new Currency('USD')))
-            ->subtract(new Money(PHP_INT_MAX / 100, new Currency('USD')));
+        Money::create(-20, new Currency('USD'))
+            ->subtract(Money::create(PHP_INT_MAX / 100, new Currency('USD')));
     }
 }

@@ -19,7 +19,7 @@ class MoneyCreateTest extends \PHPUnit_Framework_TestCase
      */
     public function validMoney($amount, Currency $currency)
     {
-        $this->assertInstanceOf(Money::class, new Money($amount, $currency));
+        $this->assertInstanceOf(Money::class, Money::create($amount, $currency));
     }
 
     /**
@@ -59,7 +59,7 @@ class MoneyCreateTest extends \PHPUnit_Framework_TestCase
     public function invalidMoney($amount)
     {
         $this->expectException(\InvalidArgumentException::class);
-        new Money($amount, new Currency('USD'));
+        Money::create($amount, new Currency('USD'));
     }
 
     /**

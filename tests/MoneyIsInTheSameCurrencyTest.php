@@ -30,12 +30,12 @@ class MoneyIsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                new Money(10, new Currency('USD')),
-                new Money(50, new Currency('USD')),
+                Money::create(10, new Currency('USD')),
+                Money::create(50, new Currency('USD')),
             ],
             [
-                new Money(5.5, new Currency('EUR')),
-                new Money(200, new Currency('EUR')),
+                Money::create(5.5, new Currency('EUR')),
+                Money::create(200, new Currency('EUR')),
             ],
         ];
     }
@@ -59,12 +59,12 @@ class MoneyIsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                new Money(10, new Currency('USD')),
-                new Money(50, new Currency('EUR')),
+                Money::create(10, new Currency('USD')),
+                Money::create(50, new Currency('EUR')),
             ],
             [
-                new Money(100, new Currency('USD')),
-                new Money(100, new Currency('EUR')),
+                Money::create(100, new Currency('USD')),
+                Money::create(100, new Currency('EUR')),
             ],
         ];
     }

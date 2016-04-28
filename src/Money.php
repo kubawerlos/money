@@ -13,9 +13,19 @@ final class Money
     /**
      * @param float|int $amount
      * @param Currency $currency
+     * @return self
+     */
+    public static function create($amount, Currency $currency)
+    {
+        return new self($amount, $currency);
+    }
+
+    /**
+     * @param float|int $amount
+     * @param Currency $currency
      * @throws \InvalidArgumentException
      */
-    public function __construct($amount, Currency $currency)
+    private function __construct($amount, Currency $currency)
     {
         $this->currency = $currency;
         $this->setAmount($amount);
