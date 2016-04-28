@@ -5,30 +5,44 @@ namespace KubaWerlos\Money;
 final class Money
 {
     /** @var int */
-    private $amount;
+    private $baseAmount;
 
     /** @var Currency */
     private $currency;
 
     /**
-     * @param float|int $amount
+     * @param float|int|string $amount
      * @param Currency $currency
+     * @throws \InvalidArgumentException
      * @return self
      */
     public static function create($amount, Currency $currency)
     {
-        return new self($amount, $currency);
+        $baseAmount = self::calculateBaseAmount($amount, $currency);
+        return new self($baseAmount, $currency);
     }
 
     /**
-     * @param float|int $amount
+     * @param int $baseAmount
      * @param Currency $currency
-     * @throws \InvalidArgumentException
      */
-    private function __construct($amount, Currency $currency)
+    private function __construct($baseAmount, Currency $currency)
     {
+        $this->baseAmount = $baseAmount;
         $this->currency = $currency;
-        $this->setAmount($amount);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAmount()
+    {
+        return number_format(
+            $this->baseAmount / pow(10, $this->currency->getFractionDigits()),
+            $this->currency->getFractionDigits(),
+            '.',
+            ' '
+        );
     }
 
     /**
@@ -37,7 +51,7 @@ final class Money
      */
     public function isEqual(self $money)
     {
-        return $this->isInTheSameCurrency($money) && $this->amount === $money->amount;
+        return $this->isInTheSameCurrency($money) && $this->baseAmount === $money->baseAmount;
     }
 
     /**
@@ -56,48 +70,77 @@ final class Money
      */
     public function add(self $money)
     {
-        if (!$this->isInTheSameCurrency($money)) {
-            throw new \InvalidArgumentException('Different currencies');
-        }
-
-        $result = new self(0, $this->currency);
-
-        $result->amount += $this->amount + $money->amount;
-
-        if (!is_int($result->amount)) {
-            throw new \OverflowException('Stack overflow');
-        }
-
-        return $result;
+        return $this->calculate($money, 1);
     }
 
     /**
      * @param Money $money
      * @throws \InvalidArgumentException
+     * @throws \OverflowException
      * @return self
      */
     public function subtract(self $money)
     {
-        $money->amount *= -1;
-        return $this->add($money);
+        return $this->calculate($money, -1);
     }
 
     /**
-     * @param float|int $amount
+     * @param Money $money
+     * @param int $factor
      * @throws \InvalidArgumentException
+     * @throws \OverflowException
+     * @return self
      */
-    private function setAmount($amount)
+    private function calculate(self $money, $factor)
     {
-        if (!is_int($amount) && !is_float($amount)) {
-            throw new \InvalidArgumentException('Money amount is invalid');
+        if (!$this->isInTheSameCurrency($money)) {
+            throw new \InvalidArgumentException('Different currencies');
         }
 
-        $newAmount = round($amount, $this->currency->getFractionDigits());
+        $newAmount = $this->baseAmount + $factor * $money->baseAmount;
 
-        if ((string) $amount !== (string) $newAmount) {
-            throw new \InvalidArgumentException('Money amount is invalid for this currency');
+        if (!is_int($newAmount)) {
+            throw new \OverflowException('Stack overflow');
         }
 
-        $this->amount = (int) round(pow(10, $this->currency->getFractionDigits()) * $newAmount);
+        return new self($newAmount, $this->currency);
+    }
+
+    /**
+     * @param float|int|string $amount
+     * @param Currency $currency
+     * @throws \InvalidArgumentException
+     * @return int
+     */
+    private static function calculateBaseAmount($amount, Currency $currency)
+    {
+        if (is_int($amount) || is_float($amount)) {
+            $amount = (string) $amount;
+        }
+
+        if (!is_string($amount)) {
+            throw new \InvalidArgumentException('Money baseAmount is invalid');
+        }
+
+        if (!self::isValid($amount, $currency)) {
+            throw new \InvalidArgumentException('Money baseAmount is invalid for this currency');
+        }
+
+        return (int) round(pow(10, $currency->getFractionDigits()) * $amount);
+    }
+
+    /**
+     * @param string $amount
+     * @param Currency $currency
+     * @return bool
+     */
+    private static function isValid($amount, Currency $currency)
+    {
+        $fractionExpression = $currency->getFractionDigits() > 0
+            ? sprintf('(\.\d{1,%d})?', $currency->getFractionDigits())
+            : '';
+
+        return preg_match('/^-?\d+' . $fractionExpression . '$/', $amount) > 0
+            && !(preg_match('/^0\d+/', $amount) > 0);
     }
 }
