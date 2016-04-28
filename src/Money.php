@@ -115,14 +115,6 @@ final class Money
      */
     private static function calculateBaseAmount($amount, Currency $currency)
     {
-        if (is_int($amount) || is_float($amount)) {
-            $amount = (string) $amount;
-        }
-
-        if (!is_string($amount)) {
-            throw new \InvalidArgumentException('Amount is invalid');
-        }
-
         if (!self::isValid($amount, $currency)) {
             throw new \InvalidArgumentException('Amount is invalid for this currency');
         }
@@ -133,10 +125,15 @@ final class Money
     /**
      * @param string $amount
      * @param Currency $currency
+     * @throws \InvalidArgumentException
      * @return bool
      */
     private static function isValid($amount, Currency $currency)
     {
+        if (!is_int($amount) && !is_float($amount) && !is_string($amount)) {
+            throw new \InvalidArgumentException('Amount is invalid');
+        }
+
         $pattern = '/^-?\d+';
 
         if ($currency->getFractionDigits() > 0) {
@@ -145,6 +142,6 @@ final class Money
 
         $pattern .= '$/';
 
-        return preg_match($pattern, $amount) > 0 && !(preg_match('/^0\d+/', $amount) > 0);
+        return preg_match($pattern, $amount) > 0 && preg_match('/^0\d+/', $amount) === 0;
     }
 }
