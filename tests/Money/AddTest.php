@@ -7,18 +7,18 @@ use KubaWerlos\Money\Money;
 
 /**
  * @covers \KubaWerlos\Money\Money::add
- * @covers \KubaWerlos\Money\Money::<private>
+ * @covers \KubaWerlos\Money\Money::calculate
  */
-class MoneyAddTest extends \PHPUnit_Framework_TestCase
+class AddTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider correctAddMoneyProvider
+     * @dataProvider correctAdditionProvider
      * @param Money $base
      * @param Money $added
      * @param Money $expected
      * @test
      */
-    public function correctAddMoney(Money $base, Money $added, Money $expected)
+    public function correctAddition(Money $base, Money $added, Money $expected)
     {
         $this->assertTrue($expected->isEqual($base->add($added)));
     }
@@ -26,7 +26,7 @@ class MoneyAddTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function correctAddMoneyProvider()
+    public function correctAdditionProvider()
     {
         return [
             [
@@ -58,13 +58,13 @@ class MoneyAddTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider incorrectAddMoneyProvider
+     * @dataProvider incorrectAdditionProvider
      * @param Money $base
      * @param Money $added
      * @param Money $expected
      * @test
      */
-    public function incorrectAddMoney(Money $base, Money $added, Money $expected)
+    public function incorrectAddition(Money $base, Money $added, Money $expected)
     {
         $this->assertFalse($expected->isEqual($base->add($added)));
     }
@@ -72,7 +72,7 @@ class MoneyAddTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function incorrectAddMoneyProvider()
+    public function incorrectAdditionProvider()
     {
         return [
             [
@@ -89,33 +89,31 @@ class MoneyAddTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider incorrectArgumentsInAddMoneyProvider
+     * @dataProvider throwInvalidArgumentExceptionForNotMatchingCurrenciesProvider
      * @param Money $base
      * @param Money $added
-     * @param Money $expected
      * @test
      */
-    public function incorrectArgumentsInAddMoney(Money $base, Money $added, Money $expected)
+    public function throwInvalidArgumentExceptionForNotMatchingCurrencies(Money $base, Money $added)
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->assertFalse($expected->isEqual($base->add($added)));
+
+        $base->add($added);
     }
 
     /**
      * @return array
      */
-    public function incorrectArgumentsInAddMoneyProvider()
+    public function throwInvalidArgumentExceptionForNotMatchingCurrenciesProvider()
     {
         return [
             [
                 Money::create(2, new Currency('EUR')),
                 Money::create(2, new Currency('USD')),
-                Money::create(4, new Currency('USD')),
             ],
             [
                 Money::create(2, new Currency('USD')),
                 Money::create(2, new Currency('EUR')),
-                Money::create(4, new Currency('USD')),
             ],
         ];
     }
@@ -123,11 +121,11 @@ class MoneyAddTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function subtractOverflowException()
+    public function throwRangeExceptionWhenAmountIsTooLarge()
     {
-        $this->expectException(\OverflowException::class);
+        $this->expectException(\RangeException::class);
 
-        Money::create(PHP_INT_MAX / 100, new Currency('USD'))
-            ->add(Money::create(PHP_INT_MAX / 100, new Currency('USD')));
+        Money::create((int) (PHP_INT_MAX / 100), new Currency('USD'))
+            ->add(Money::create(2000, new Currency('USD')));
     }
 }

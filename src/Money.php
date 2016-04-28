@@ -66,6 +66,7 @@ final class Money
     /**
      * @param Money $money
      * @throws \InvalidArgumentException
+     * @throws \RangeException
      * @return self
      */
     public function add(self $money)
@@ -76,7 +77,7 @@ final class Money
     /**
      * @param Money $money
      * @throws \InvalidArgumentException
-     * @throws \OverflowException
+     * @throws \RangeException
      * @return self
      */
     public function subtract(self $money)
@@ -88,22 +89,22 @@ final class Money
      * @param Money $money
      * @param int $factor
      * @throws \InvalidArgumentException
-     * @throws \OverflowException
+     * @throws \RangeException
      * @return self
      */
     private function calculate(self $money, $factor)
     {
         if (!$this->isInTheSameCurrency($money)) {
-            throw new \InvalidArgumentException('Different currencies');
+            throw new \InvalidArgumentException('Money have different currencies');
         }
 
-        $newAmount = $this->baseAmount + $factor * $money->baseAmount;
+        $baseAmount = $this->baseAmount + $factor * $money->baseAmount;
 
-        if (!is_int($newAmount)) {
-            throw new \OverflowException('Stack overflow');
+        if (!is_int($baseAmount)) {
+            throw new \RangeException('Result of calculation is out of range');
         }
 
-        return new self($newAmount, $this->currency);
+        return new self($baseAmount, $this->currency);
     }
 
     /**

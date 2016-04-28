@@ -7,17 +7,18 @@ use KubaWerlos\Money\Money;
 
 /**
  * @covers \KubaWerlos\Money\Money::subtract
+ * @covers \KubaWerlos\Money\Money::calculate
  */
-class MoneySubtractTest extends \PHPUnit_Framework_TestCase
+class SubtractTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @dataProvider correctSubtractMoneyProvider
+     * @dataProvider correctSubtractionProvider
      * @param Money $base
      * @param Money $subtracted
      * @param Money $expected
      * @test
      */
-    public function correctSubtractMoney(Money $base, Money $subtracted, Money $expected)
+    public function correctSubtraction(Money $base, Money $subtracted, Money $expected)
     {
         $this->assertTrue($expected->isEqual($base->subtract($subtracted)));
     }
@@ -25,7 +26,7 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function correctSubtractMoneyProvider()
+    public function correctSubtractionProvider()
     {
         return [
             [
@@ -47,13 +48,13 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider incorrectSubtractMoneyProvider
+     * @dataProvider incorrectSubtractionProvider
      * @param Money $base
      * @param Money $subtracted
      * @param Money $expected
      * @test
      */
-    public function incorrectSubtractMoney(Money $base, Money $subtracted, Money $expected)
+    public function incorrectSubtraction(Money $base, Money $subtracted, Money $expected)
     {
         $this->assertFalse($expected->isEqual($base->subtract($subtracted)));
     }
@@ -61,7 +62,7 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function incorrectSubtractMoneyProvider()
+    public function incorrectSubtractionProvider()
     {
         return [
             [
@@ -78,33 +79,31 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider incorrectArgumentsInSubtractMoneyProvider
+     * @dataProvider throwInvalidArgumentExceptionForNotMatchingCurrenciesProvider
      * @param Money $base
      * @param Money $subtracted
-     * @param Money $expected
      * @test
      */
-    public function incorrectArgumentsInSubtractMoney(Money $base, Money $subtracted, Money $expected)
+    public function throwInvalidArgumentExceptionForNotMatchingCurrencies(Money $base, Money $subtracted)
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->assertFalse($expected->isEqual($base->subtract($subtracted)));
+
+        $base->subtract($subtracted);
     }
 
     /**
      * @return array
      */
-    public function incorrectArgumentsInSubtractMoneyProvider()
+    public function throwInvalidArgumentExceptionForNotMatchingCurrenciesProvider()
     {
         return [
             [
                 Money::create(2, new Currency('EUR')),
                 Money::create(2, new Currency('USD')),
-                Money::create(4, new Currency('USD')),
             ],
             [
                 Money::create(2, new Currency('USD')),
                 Money::create(2, new Currency('EUR')),
-                Money::create(4, new Currency('USD')),
             ],
         ];
     }
@@ -112,11 +111,11 @@ class MoneySubtractTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function subtractOverflowException()
+    public function throwsRangeExceptionWhenAmountIsTooSmall()
     {
-        $this->expectException(\OverflowException::class);
+        $this->expectException(\RangeException::class);
 
-        Money::create(-20, new Currency('USD'))
-            ->subtract(Money::create(PHP_INT_MAX / 100, new Currency('USD')));
+        Money::create(-100, new Currency('USD'))
+            ->subtract(Money::create((int) (PHP_INT_MAX / 100), new Currency('USD')));
     }
 }
