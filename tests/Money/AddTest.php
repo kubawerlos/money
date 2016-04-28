@@ -9,7 +9,7 @@ use KubaWerlos\Money\Money;
  * @covers \KubaWerlos\Money\Money::add
  * @covers \KubaWerlos\Money\Money::calculate
  */
-class AdditionTest extends \PHPUnit_Framework_TestCase
+class AddTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctAdditionProvider

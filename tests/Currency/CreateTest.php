@@ -8,7 +8,7 @@ use KubaWerlos\Money\Currency;
  * @covers \KubaWerlos\Money\Currency::__construct
  * @covers \KubaWerlos\Money\Currency::<private>
  */
-class CreationTest extends \PHPUnit_Framework_TestCase
+class CreateTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider validCurrencyProvider
@@ -34,32 +34,33 @@ class CreationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider invalidCurrencyProvider
+     * @dataProvider throwInvalidArgumentExceptionForInvalidCurrencyProvider
      * @param mixed $code
      * @test
      */
-    public function invalidCurrency($code)
+    public function throwInvalidArgumentExceptionForInvalidCurrency($code)
     {
         $this->expectException(\InvalidArgumentException::class);
+
         new Currency($code);
     }
 
     /**
      * @return array
      */
-    public function invalidCurrencyProvider()
+    public function throwInvalidArgumentExceptionForInvalidCurrencyProvider()
     {
         return [
-            [null],
-            [true],
-            [false],
-            [42],
-            [123.456],
-            ['Euro'],
-            ['Polish Zloty'],
-            ['CIA'],
-            ['FBI'],
-            ['USA'],
+            [ null ],
+            [ true ],
+            [ false ],
+            [ 42 ],
+            [ 123.456 ],
+            [ 'Euro' ],
+            [ 'Polish Zloty' ],
+            [ 'CIA' ],
+            [ 'FBI' ],
+            [ 'USA' ],
         ];
     }
 }

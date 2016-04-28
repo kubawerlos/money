@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
@@ -8,7 +8,7 @@ use KubaWerlos\Money\Money;
 /**
  * @covers \KubaWerlos\Money\Money::isEqual
  */
-class MoneyIsEqualTest extends \PHPUnit_Framework_TestCase
+class IsEqualTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider equalMoneyProvider
@@ -67,12 +67,16 @@ class MoneyIsEqualTest extends \PHPUnit_Framework_TestCase
                 Money::create(1, new Currency('USD')),
             ],
             [
+                Money::create(2, new Currency('USD')),
+                Money::create(-2, new Currency('USD')),
+            ],
+            [
                 Money::create(1000, new Currency('EUR')),
                 Money::create(1000, new Currency('PLN')),
             ],
             [
-                Money::create(2.5, new Currency('PLN')),
-                Money::create(50, new Currency('EUR')),
+                Money::create(-5, new Currency('PLN')),
+                Money::create(-5, new Currency('EUR')),
             ],
         ];
     }

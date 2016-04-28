@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
@@ -10,7 +10,7 @@ use KubaWerlos\Money\Money;
  * @covers \KubaWerlos\Money\Money::getAmount
  * @covers \KubaWerlos\Money\Money::<private>
  */
-class MoneyCreateTest extends \PHPUnit_Framework_TestCase
+class CreateTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider validMoneyProvider
@@ -20,10 +20,7 @@ class MoneyCreateTest extends \PHPUnit_Framework_TestCase
      */
     public function validMoney($amount, Currency $currency)
     {
-        $this->assertSame(
-            number_format($amount, $currency->getFractionDigits(), '.', ' '),
-            Money::create($amount, $currency)->getAmount()
-        );
+        $this->assertInstanceOf(Money::class, Money::create($amount, $currency));
     }
 
     /**
@@ -46,16 +43,20 @@ class MoneyCreateTest extends \PHPUnit_Framework_TestCase
             [ '-1.3', new Currency('TRY') ],
             [ -1.55, new Currency('TRY') ],
             [ '-1.55', new Currency('TRY') ],
+            [ 2 + 2, new Currency('USD') ],
+            [ 32 - 50, new Currency('USD') ],
+            [ 10 / 4, new Currency('USD') ],
+            [ 3 * 2.5, new Currency('USD') ],
         ];
     }
 
     /**
-     * @dataProvider invalidMoneyProvider
+     * @dataProvider throwInvalidArgumentExceptionForInvalidAmountProvider
      * @param mixed $amount
      * @param Currency $currency
      * @test
      */
-    public function invalidMoney($amount, Currency $currency)
+    public function throwInvalidArgumentExceptionForInvalidAmount($amount, Currency $currency)
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -65,22 +66,28 @@ class MoneyCreateTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function invalidMoneyProvider()
+    public function throwInvalidArgumentExceptionForInvalidAmountProvider()
     {
         return [
             [ null, new Currency('USD') ],
             [ true, new Currency('USD') ],
             [ false, new Currency('USD') ],
+            [ [1, 2], new Currency('USD') ],
+            [ '', new Currency('USD') ],
             [ 'abc', new Currency('USD') ],
+            [ 123.456, new Currency('USD') ],
             [ 2.5, new Currency('HUF') ],
-            [ 123.456, new Currency('HUF') ],
             [ -12.345, new Currency('TRY') ],
             [ '7 Dollars', new Currency('USD') ],
             [ '01', new Currency('USD') ],
             [ '00.5', new Currency('USD') ],
+            [ '0.500', new Currency('USD') ],
             [ '10.', new Currency('USD') ],
             [ '10.2', new Currency('HUF') ],
-            [ '1.2.3', new Currency('USD') ],
+            [ '1/2', new Currency('USD') ],
+            [ '5,5', new Currency('USD') ],
+            [ '1,2.3', new Currency('USD') ],
+            [ sqrt(-1), new Currency('USD') ],
         ];
     }
 }

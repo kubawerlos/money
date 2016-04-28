@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
@@ -8,7 +8,7 @@ use KubaWerlos\Money\Money;
 /**
  * @covers \KubaWerlos\Money\Money::isInTheSameCurrency
  */
-class MoneyIsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
+class IsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider sameCurrencyProvider
@@ -16,7 +16,7 @@ class MoneyIsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
      * @param Money $money2
      * @test
      */
-    public function sameCurrencyMoney(Money $money1, Money $money2)
+    public function sameCurrency(Money $money1, Money $money2)
     {
         $this->assertTrue($money1->isInTheSameCurrency($money1));
         $this->assertTrue($money1->isInTheSameCurrency($money2));
@@ -36,6 +36,10 @@ class MoneyIsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
             [
                 Money::create(5.5, new Currency('EUR')),
                 Money::create(200, new Currency('EUR')),
+            ],
+            [
+                Money::create(-2, new Currency('EUR')),
+                Money::create(22, new Currency('EUR')),
             ],
         ];
     }
@@ -60,11 +64,15 @@ class MoneyIsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 Money::create(10, new Currency('USD')),
-                Money::create(50, new Currency('EUR')),
+                Money::create(10, new Currency('EUR')),
             ],
             [
                 Money::create(100, new Currency('USD')),
                 Money::create(100, new Currency('EUR')),
+            ],
+            [
+                Money::create(55, new Currency('USD')),
+                Money::create(-5, new Currency('EUR')),
             ],
         ];
     }
