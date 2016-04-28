@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
@@ -121,11 +121,11 @@ class AddTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function throwRangeExceptionWhenAmountIsTooLarge()
+    public function throwRangeExceptionWhenResultIsTooLarge()
     {
         $this->expectException(\RangeException::class);
 
-        Money::create((int) (PHP_INT_MAX / 100), new Currency('USD'))
-            ->add(Money::create(2000, new Currency('USD')));
+        $money = Money::create((int) (PHP_INT_MAX / 101), new Currency('USD'));
+        $money->add($money);
     }
 }

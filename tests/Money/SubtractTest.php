@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
@@ -111,11 +111,11 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function throwsRangeExceptionWhenAmountIsTooSmall()
+    public function throwsRangeExceptionWhenResultIsTooSmall()
     {
         $this->expectException(\RangeException::class);
 
-        Money::create(-100, new Currency('USD'))
-            ->subtract(Money::create((int) (PHP_INT_MAX / 100), new Currency('USD')));
+        Money::create((int) (PHP_INT_MIN / 101), new Currency('USD'))
+            ->subtract(Money::create((int) (PHP_INT_MAX / 101), new Currency('USD')));
     }
 }
