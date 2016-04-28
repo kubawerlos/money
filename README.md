@@ -1,3 +1,9 @@
+KubaWerlos / Money
+==================
+
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg)](https://php.net/)
+[![Travis CI](https://travis-ci.org/kubawerlos/money.svg?branch=master)](https://travis-ci.org/kubawerlos/money)
+
 Simple implementation of Money Value Object
 
 Installation
