@@ -134,8 +134,7 @@ final class Money
             throw new \InvalidArgumentException('Amount is invalid');
         }
 
-        return self::isMatchingMoneyPattern($amount, $currency->getFractionDigits())
-            && preg_match('/^0\d+/', $amount) === 0;
+        return self::isMatchingMoneyPattern($amount, $currency->getFractionDigits());
     }
 
     /**
@@ -152,6 +151,7 @@ final class Money
             $pattern .= sprintf('(\.\d{1,%d})?', $fractionDigits);
         }
 
-        return preg_match('/^' . $pattern . '$/', $amount) > 0 ;
+        return preg_match('/^' . $pattern . '$/', $amount) > 0
+            && preg_match('/^0\d+/', $amount) === 0;
     }
 }
