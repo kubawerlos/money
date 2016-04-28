@@ -123,7 +123,7 @@ final class Money
     }
 
     /**
-     * @param string $amount
+     * @param float|int|string $amount
      * @param Currency $currency
      * @throws \InvalidArgumentException
      * @return bool
@@ -134,14 +134,24 @@ final class Money
             throw new \InvalidArgumentException('Amount is invalid');
         }
 
-        $pattern = '/^-?\d+';
+        return self::isMatchingMoneyPattern($amount, $currency->getFractionDigits())
+            && preg_match('/^0\d+/', $amount) === 0;
+    }
 
-        if ($currency->getFractionDigits() > 0) {
-            $pattern .= sprintf('(\.\d{1,%d})?', $currency->getFractionDigits());
+    /**
+     * @param string $amount
+     * @param int $fractionDigits
+     * @throws \InvalidArgumentException
+     * @return bool
+     */
+    private static function isMatchingMoneyPattern($amount, $fractionDigits)
+    {
+        $pattern = '-?\d+';
+
+        if ($fractionDigits > 0) {
+            $pattern .= sprintf('(\.\d{1,%d})?', $fractionDigits);
         }
 
-        $pattern .= '$/';
-
-        return preg_match($pattern, $amount) > 0 && preg_match('/^0\d+/', $amount) === 0;
+        return preg_match('/^' . $pattern . '$/', $amount) > 0 ;
     }
 }

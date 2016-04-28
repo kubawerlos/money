@@ -7,9 +7,7 @@ use KubaWerlos\Money\Money;
 
 /**
  * @covers \KubaWerlos\Money\Money::create
- * @covers \KubaWerlos\Money\Money::calculateBaseAmount
- * @covers \KubaWerlos\Money\Money::isValid
- * @covers \KubaWerlos\Money\Money::__construct
+ * @covers \KubaWerlos\Money\Money::<private>
  */
 class CreateTest extends \PHPUnit_Framework_TestCase
 {
