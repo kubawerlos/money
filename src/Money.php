@@ -120,11 +120,11 @@ final class Money
         }
 
         if (!is_string($amount)) {
-            throw new \InvalidArgumentException('Money baseAmount is invalid');
+            throw new \InvalidArgumentException('Amount is invalid');
         }
 
         if (!self::isValid($amount, $currency)) {
-            throw new \InvalidArgumentException('Money baseAmount is invalid for this currency');
+            throw new \InvalidArgumentException('Amount is invalid for this currency');
         }
 
         return (int) round(pow(10, $currency->getFractionDigits()) * $amount);
@@ -137,11 +137,14 @@ final class Money
      */
     private static function isValid($amount, Currency $currency)
     {
-        $fractionExpression = $currency->getFractionDigits() > 0
-            ? sprintf('(\.\d{1,%d})?', $currency->getFractionDigits())
-            : '';
+        $pattern = '/^-?\d+';
 
-        return preg_match('/^-?\d+' . $fractionExpression . '$/', $amount) > 0
-            && !(preg_match('/^0\d+/', $amount) > 0);
+        if ($currency->getFractionDigits() > 0) {
+            $pattern .= sprintf('(\.\d{1,%d})?', $currency->getFractionDigits());
+        }
+
+        $pattern .= '$/';
+
+        return preg_match($pattern, $amount) > 0 && !(preg_match('/^0\d+/', $amount) > 0);
     }
 }
