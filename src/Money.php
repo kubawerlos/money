@@ -5,30 +5,31 @@ namespace KubaWerlos\Money;
 final class Money
 {
     /** @var int */
-    private $baseAmount;
+    private $subunitAmount;
 
     /** @var Currency */
     private $currency;
 
     /**
-     * @param float|int|string $amount
+     * @deprecated
+     * @param float|int|string $unitAmount
      * @param Currency $currency
      * @throws \InvalidArgumentException
      * @return self
      */
-    public static function create($amount, Currency $currency)
+    public static function create($unitAmount, Currency $currency)
     {
-        $baseAmount = self::calculateBaseAmount($amount, $currency);
-        return new self($baseAmount, $currency);
+        return new self($unitAmount, $currency);
     }
 
     /**
-     * @param int $baseAmount
+     * @param float|int|string $unitAmount
      * @param Currency $currency
+     * @throws \InvalidArgumentException
      */
-    private function __construct($baseAmount, Currency $currency)
+    private function __construct($unitAmount, Currency $currency)
     {
-        $this->baseAmount = $baseAmount;
+        $this->subunitAmount = (new Converter($currency))->toSubunitFromUnit($unitAmount);
         $this->currency = $currency;
     }
 
@@ -37,12 +38,7 @@ final class Money
      */
     public function getAmount()
     {
-        return number_format(
-            $this->baseAmount / pow(10, $this->currency->getFractionDigits()),
-            $this->currency->getFractionDigits(),
-            '.',
-            ' '
-        );
+        return (new Converter($this->currency))->toUnitFromSubunit($this->subunitAmount);
     }
 
     /**
@@ -51,7 +47,8 @@ final class Money
      */
     public function isEqual(self $money)
     {
-        return $this->isInTheSameCurrency($money) && $this->baseAmount === $money->baseAmount;
+        return $this->isInTheSameCurrency($money)
+            && $this->subunitAmount === $money->subunitAmount;
     }
 
     /**
@@ -95,63 +92,15 @@ final class Money
     private function calculate(self $money, $factor)
     {
         if (!$this->isInTheSameCurrency($money)) {
-            throw new \InvalidArgumentException('Money have different currencies');
+            throw new \InvalidArgumentException();
         }
 
-        $baseAmount = $this->baseAmount + $factor * $money->baseAmount;
+        $subunitAmount = $this->subunitAmount + $factor * $money->subunitAmount;
 
-        if (!is_int($baseAmount)) {
-            throw new \RangeException('Result of calculation is out of range');
+        if (!is_int($subunitAmount)) {
+            throw new \RangeException();
         }
 
-        return new self($baseAmount, $this->currency);
-    }
-
-    /**
-     * @param float|int|string $amount
-     * @param Currency $currency
-     * @throws \InvalidArgumentException
-     * @return int
-     */
-    private static function calculateBaseAmount($amount, Currency $currency)
-    {
-        if (!self::isValid($amount, $currency)) {
-            throw new \InvalidArgumentException('Amount is invalid for this currency');
-        }
-
-        return (int) round(pow(10, $currency->getFractionDigits()) * $amount);
-    }
-
-    /**
-     * @param float|int|string $amount
-     * @param Currency $currency
-     * @throws \InvalidArgumentException
-     * @return bool
-     */
-    private static function isValid($amount, Currency $currency)
-    {
-        if (!is_int($amount) && !is_float($amount) && !is_string($amount)) {
-            throw new \InvalidArgumentException('Amount is invalid');
-        }
-
-        return self::isMatchingMoneyPattern($amount, $currency->getFractionDigits());
-    }
-
-    /**
-     * @param string $amount
-     * @param int $fractionDigits
-     * @throws \InvalidArgumentException
-     * @return bool
-     */
-    private static function isMatchingMoneyPattern($amount, $fractionDigits)
-    {
-        $pattern = '-?\d+';
-
-        if ($fractionDigits > 0) {
-            $pattern .= sprintf('(\.\d{1,%d})?', $fractionDigits);
-        }
-
-        return preg_match('/^' . $pattern . '$/', $amount) > 0
-            && preg_match('/^0\d+/', $amount) === 0;
+        return new self((new Converter($this->currency))->toUnitFromSubunit($subunitAmount), $this->currency);
     }
 }
