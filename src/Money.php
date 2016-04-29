@@ -11,23 +11,11 @@ final class Money
     private $currency;
 
     /**
-     * @deprecated
-     * @param float|int|string $unitAmount
-     * @param Currency $currency
-     * @throws \InvalidArgumentException
-     * @return self
-     */
-    public static function create($unitAmount, Currency $currency)
-    {
-        return new self($unitAmount, $currency);
-    }
-
-    /**
      * @param float|int|string $unitAmount
      * @param Currency $currency
      * @throws \InvalidArgumentException
      */
-    private function __construct($unitAmount, Currency $currency)
+    public function __construct($unitAmount, Currency $currency)
     {
         $this->subunitAmount = (new Converter($currency))->toSubunitFromUnit($unitAmount);
         $this->currency = $currency;

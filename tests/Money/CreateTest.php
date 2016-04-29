@@ -6,7 +6,7 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::create
+ * @covers \KubaWerlos\Money\Money::__construct
  * @covers \KubaWerlos\Money\Money::<private>
  */
 class CreateTest extends \PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class CreateTest extends \PHPUnit_Framework_TestCase
      */
     public function validMoney($amount, Currency $currency)
     {
-        $this->assertInstanceOf(Money::class, Money::create($amount, $currency));
+        $this->assertInstanceOf(Money::class, new Money($amount, $currency));
     }
 
     /**
@@ -55,7 +55,7 @@ class CreateTest extends \PHPUnit_Framework_TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        $this->assertInstanceOf(Money::class, Money::create($amount, $currency));
+        $this->assertInstanceOf(Money::class, new Money($amount, $currency));
     }
 
     /**

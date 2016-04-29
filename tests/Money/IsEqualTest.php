@@ -30,16 +30,16 @@ class IsEqualTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                Money::create(0, new Currency('USD')),
-                Money::create(0, new Currency('USD')),
+                new Money(0, new Currency('USD')),
+                new Money(0, new Currency('USD')),
             ],
             [
-                Money::create(1000, new Currency('EUR')),
-                Money::create(1000, new Currency('EUR')),
+                new Money(1000, new Currency('EUR')),
+                new Money(1000, new Currency('EUR')),
             ],
             [
-                Money::create(2.5, new Currency('PLN')),
-                Money::create(2.5, new Currency('PLN')),
+                new Money(2.5, new Currency('PLN')),
+                new Money(2.5, new Currency('PLN')),
             ],
         ];
     }
@@ -63,20 +63,20 @@ class IsEqualTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                Money::create(0, new Currency('USD')),
-                Money::create(1, new Currency('USD')),
+                new Money(0, new Currency('USD')),
+                new Money(1, new Currency('USD')),
             ],
             [
-                Money::create(2, new Currency('USD')),
-                Money::create(-2, new Currency('USD')),
+                new Money(2, new Currency('USD')),
+                new Money(-2, new Currency('USD')),
             ],
             [
-                Money::create(1000, new Currency('EUR')),
-                Money::create(1000, new Currency('PLN')),
+                new Money(1000, new Currency('EUR')),
+                new Money(1000, new Currency('PLN')),
             ],
             [
-                Money::create(-5, new Currency('PLN')),
-                Money::create(-5, new Currency('EUR')),
+                new Money(-5, new Currency('PLN')),
+                new Money(-5, new Currency('EUR')),
             ],
         ];
     }

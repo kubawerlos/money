@@ -27,15 +27,15 @@ class GetAmountTest extends \PHPUnit_Framework_TestCase
     public function getAmountFormatProvider()
     {
         return [
-            [ '0.00', Money::create(0, new Currency('USD')) ],
-            [ '1.00', Money::create(1, new Currency('EUR')) ],
-            [ '1.99', Money::create(1.99, new Currency('PLN')) ],
-            [ '-5.00', Money::create(-5, new Currency('USD')) ],
-            [ '-2.55', Money::create(-2.55, new Currency('USD')) ],
-            [ '1000.00', Money::create(1000, new Currency('USD')) ],
-            [ '0', Money::create(0, new Currency('HUF')) ],
-            [ '20', Money::create(20, new Currency('HUF')) ],
-            [ '-7', Money::create(-7, new Currency('HUF')) ],
+            [ '0.00', new Money(0, new Currency('USD')) ],
+            [ '1.00', new Money(1, new Currency('EUR')) ],
+            [ '1.99', new Money(1.99, new Currency('PLN')) ],
+            [ '-5.00', new Money(-5, new Currency('USD')) ],
+            [ '-2.55', new Money(-2.55, new Currency('USD')) ],
+            [ '1000.00', new Money(1000, new Currency('USD')) ],
+            [ '0', new Money(0, new Currency('HUF')) ],
+            [ '20', new Money(20, new Currency('HUF')) ],
+            [ '-7', new Money(-7, new Currency('HUF')) ],
         ];
     }
 }

@@ -25,9 +25,9 @@ Usage
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
-$tenEuro = Money::create(10, new Currency('EUR'));
+$tenEuro = new Money(10, new Currency('EUR'));
 
 $twentyEuro = $tenEuro->add($tenEuro);
 
-assert($twentyEuro->isEqual(Money::create(20.00, new Currency('EUR'))));
+assert($twentyEuro->isEqual(new Money(20.00, new Currency('EUR'))));
 ```

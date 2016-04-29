@@ -30,16 +30,16 @@ class IsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                Money::create(10, new Currency('USD')),
-                Money::create(50, new Currency('USD')),
+                new Money(10, new Currency('USD')),
+                new Money(50, new Currency('USD')),
             ],
             [
-                Money::create(5.5, new Currency('EUR')),
-                Money::create(200, new Currency('EUR')),
+                new Money(5.5, new Currency('EUR')),
+                new Money(200, new Currency('EUR')),
             ],
             [
-                Money::create(-2, new Currency('EUR')),
-                Money::create(22, new Currency('EUR')),
+                new Money(-2, new Currency('EUR')),
+                new Money(22, new Currency('EUR')),
             ],
         ];
     }
@@ -63,16 +63,16 @@ class IsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [
-                Money::create(10, new Currency('USD')),
-                Money::create(10, new Currency('EUR')),
+                new Money(10, new Currency('USD')),
+                new Money(10, new Currency('EUR')),
             ],
             [
-                Money::create(100, new Currency('USD')),
-                Money::create(100, new Currency('EUR')),
+                new Money(100, new Currency('USD')),
+                new Money(100, new Currency('EUR')),
             ],
             [
-                Money::create(55, new Currency('USD')),
-                Money::create(-5, new Currency('EUR')),
+                new Money(55, new Currency('USD')),
+                new Money(-5, new Currency('EUR')),
             ],
         ];
     }
