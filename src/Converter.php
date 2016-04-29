@@ -36,6 +36,7 @@ class Converter
 
     /**
      * @param float|int|string $unitAmount
+     * @throws \InvalidArgumentException
      * @return int
      */
     public function toSubunitFromUnit($unitAmount)
@@ -48,11 +49,20 @@ class Converter
             throw new \InvalidArgumentException();
         }
 
-        if ($this->isValidUnitAmountString($unitAmount)) {
-            return $this->getSubunitAmountString($unitAmount);
+        return $this->getSubunitFromUnitString($unitAmount);
+    }
+
+    /**
+     * @param string $unitAmountString
+     * @return int
+     */
+    private function getSubunitFromUnitString($unitAmountString)
+    {
+        if (!$this->isValidUnitAmountString($unitAmountString)) {
+            throw new \InvalidArgumentException();
         }
 
-        throw new \InvalidArgumentException();
+        return (int) round(pow(10, $this->currency->getFractionDigits()) * $unitAmountString);
     }
 
     /**
@@ -69,14 +79,5 @@ class Converter
         }
 
         return preg_match('/^' . $pattern . '$/', $unitAmount) > 0 && preg_match('/^0\d+/', $unitAmount) === 0;
-    }
-
-    /**
-     * @param string $unitAmount
-     * @return int
-     */
-    private function getSubunitAmountString($unitAmount)
-    {
-        return (int) round(pow(10, $this->currency->getFractionDigits()) * $unitAmount);
     }
 }
