@@ -28,7 +28,9 @@ final class Money
      */
     public function getAmount()
     {
-        return (new Converter($this->currency))->getUnitFromSubunit($this->subunitAmount);
+        $converter = new Converter($this->currency);
+
+        return $converter->getUnitFromSubunit($this->subunitAmount);
     }
 
     /**
