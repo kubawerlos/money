@@ -9,7 +9,7 @@ use KubaWerlos\Money\Money;
  * @covers \KubaWerlos\Money\Money::subtract
  * @covers \KubaWerlos\Money\Money::<private>
  */
-class SubtractTest extends \PHPUnit_Framework_TestCase
+class SubtractionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctSubtractionProvider

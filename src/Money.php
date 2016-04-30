@@ -86,6 +86,21 @@ final class Money
     }
 
     /**
+     * @param int|float $divisor
+     * @throws \InvalidArgumentException
+     * @throws \RangeException
+     * @return self
+     */
+    public function divide($divisor)
+    {
+        if ($divisor == 0) {
+            throw new \RangeException();
+        }
+
+        return $this->multiply(1 / $divisor);
+    }
+
+    /**
      * @param int $subunitAmount
      * @throws \InvalidArgumentException
      * @throws \RangeException
@@ -100,7 +115,7 @@ final class Money
 
         $converter = new Converter($this->currency);
 
-        $unitAmount = $converter->getUnitFromSubunit((int) $subunitAmount);
+        $unitAmount = $converter->getUnitFromSubunit((int) round($subunitAmount));
 
         return new self($unitAmount, $this->currency);
     }

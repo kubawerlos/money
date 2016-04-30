@@ -6,26 +6,26 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::multiply
+ * @covers \KubaWerlos\Money\Money::divide
  * @covers \KubaWerlos\Money\Money::<private>
  */
-class MultiplyTest extends \PHPUnit_Framework_TestCase
+class DivisionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctMultiplicationProvider
      * @param string $expectedAmount
      * @param string $baseAmount
-     * @param int|float $multiplier
+     * @param int|float $divisor
      * @param string $currencyCode
      * @test
      */
-    public function correctMultiplication($expectedAmount, $baseAmount, $multiplier, $currencyCode)
+    public function correctMultiplication($expectedAmount, $baseAmount, $divisor, $currencyCode)
     {
         $currency = new Currency($currencyCode);
         $expectedMoney = new Money($expectedAmount, $currency);
         $baseMoney = new Money($baseAmount, $currency);
 
-        $actualMoney = $baseMoney->multiply($multiplier);
+        $actualMoney = $baseMoney->divide($divisor);
 
         $this->assertTrue($expectedMoney->isEqual($actualMoney));
     }
@@ -36,14 +36,18 @@ class MultiplyTest extends \PHPUnit_Framework_TestCase
     public function correctMultiplicationProvider()
     {
         return [
-            [ 4, 2, 2, 'USD' ],
-            [ 0, 612.33, 0, 'USD' ],
-            [ 77.77, 11.11, 7, 'EUR' ],
-            [ 123, 100, 1.23, 'PLN' ],
-            [ -160, 80, -2, 'TRY' ],
-            [ 12.34, 123.4, 0.1, 'AUD' ],
-            [ -18, -6, 3, 'HUF' ],
-            [ 30, -5, -6, 'HUF' ],
+            [ 0, 0, 8, 'USD' ],
+            [ 4.1, 12.3, 3, 'USD' ],
+            [ 12.34, 123.4, 10, 'USD' ],
+            [ 11.11, 77.77, 7, 'USD' ],
+            [ 77.77, 11.11, 1/7, 'EUR' ],
+            [ 1.23, 123, 100, 'PLN' ],
+            [ -160, 80, -0.5, 'TRY' ],
+            [ 8000.01, 16000.02, 2, 'AUD' ],
+            [ 321.42, 642.84, 2, 'AUD' ],
+            [ 0.01, 0.03, 3, 'AUD' ],
+            [ 2, -8, -4, 'HUF' ],
+            [ 3, 5, 2, 'HUF' ],
         ];
     }
 
@@ -51,17 +55,17 @@ class MultiplyTest extends \PHPUnit_Framework_TestCase
      * @dataProvider incorrectMultiplicationProvider
      * @param string $expectedAmount
      * @param string $baseAmount
-     * @param mixed $multiplier
+     * @param mixed $divisor
      * @param string $currencyCode
      * @test
      */
-    public function incorrectMultiplication($expectedAmount, $baseAmount, $multiplier, $currencyCode)
+    public function incorrectMultiplication($expectedAmount, $baseAmount, $divisor, $currencyCode)
     {
         $currency = new Currency($currencyCode);
         $expectedMoney = new Money($expectedAmount, $currency);
         $baseMoney = new Money($baseAmount, $currency);
 
-        $actualMoney = $baseMoney->multiply($multiplier);
+        $actualMoney = $baseMoney->divide($divisor);
 
         $this->assertFalse($expectedMoney->isEqual($actualMoney));
     }
@@ -72,32 +76,20 @@ class MultiplyTest extends \PHPUnit_Framework_TestCase
     public function incorrectMultiplicationProvider()
     {
         return [
-            [ 5, 2, 2, 'USD' ],
-            [ 2.50, 1.50, 2, 'USD' ],
+            [ 2, 5, 2, 'USD' ],
+            [ 1.24, 2.50, 2, 'USD' ],
         ];
     }
 
     /**
      * @test
      */
-    public function throwRangeExceptionWhenResultIsTooLarge()
+    public function throwRangeExceptionWhenDividingByZero()
     {
-        $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
+        $money = new Money(10, new Currency('USD'));
 
         $this->expectException(\RangeException::class);
 
-        $money->multiply(1000);
-    }
-
-    /**
-     * @test
-     */
-    public function throwRangeExceptionWhenResultIsTooSmall()
-    {
-        $money = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
-
-        $this->expectException(\RangeException::class);
-
-        $money->multiply(1000);
+        $money->divide(0);
     }
 }
