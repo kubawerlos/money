@@ -19,7 +19,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
      * @param string $currencyCode
      * @test
      */
-    public function correctAddition($expectedAmount, $baseAmount , $addedAmount, $currencyCode)
+    public function correctAddition($expectedAmount, $baseAmount, $addedAmount, $currencyCode)
     {
         $currency = new Currency($currencyCode);
         $expectedMoney = new Money($expectedAmount, $currency);
@@ -54,7 +54,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
      * @param string $currencyCode
      * @test
      */
-    public function incorrectAddition($expectedAmount, $baseAmount , $addedAmount, $currencyCode)
+    public function incorrectAddition($expectedAmount, $baseAmount, $addedAmount, $currencyCode)
     {
         $currency = new Currency($currencyCode);
         $expectedMoney = new Money($expectedAmount, $currency);

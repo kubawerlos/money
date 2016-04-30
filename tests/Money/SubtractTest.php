@@ -19,7 +19,7 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
      * @param string $currencyCode
      * @test
      */
-    public function correctSubtraction($expectedAmount, $baseAmount , $addedAmount, $currencyCode)
+    public function correctSubtraction($expectedAmount, $baseAmount, $addedAmount, $currencyCode)
     {
         $currency = new Currency($currencyCode);
         $expectedMoney = new Money($expectedAmount, $currency);
@@ -52,7 +52,7 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
      * @param string $currencyCode
      * @test
      */
-    public function incorrectSubtraction($expectedAmount, $baseAmount , $addedAmount, $currencyCode)
+    public function incorrectSubtraction($expectedAmount, $baseAmount, $addedAmount, $currencyCode)
     {
         $currency = new Currency($currencyCode);
         $expectedMoney = new Money($expectedAmount, $currency);
