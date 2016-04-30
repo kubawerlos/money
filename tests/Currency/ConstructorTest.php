@@ -6,9 +6,8 @@ use KubaWerlos\Money\Currency;
 
 /**
  * @covers \KubaWerlos\Money\Currency::__construct
- * @covers \KubaWerlos\Money\Currency::<private>
  */
-class CreateTest extends \PHPUnit_Framework_TestCase
+class ConstructorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider validCurrencyProvider
@@ -26,10 +25,16 @@ class CreateTest extends \PHPUnit_Framework_TestCase
     public function validCurrencyProvider()
     {
         return [
-            ['USD'],
-            ['EUR'],
-            ['PLN'],
-            ['HUF'],
+            [ 'USD' ],
+            [ 'EUR' ],
+            [ 'PLN' ],
+            [ 'TRY' ],
+            [ 'HUF' ],
+            [ 'JPY' ],
+            [ 'GBP' ],
+            [ 'AUD' ],
+            [ 'CHF' ],
+            [ 'CAD' ],
         ];
     }
 
@@ -55,12 +60,20 @@ class CreateTest extends \PHPUnit_Framework_TestCase
             [ true ],
             [ false ],
             [ 42 ],
-            [ 123.456 ],
+            [ 2.5 ],
+            [ [1, 2] ],
+            [ 'USDSuffix' ],
+            [ '' ],
+            [ 'pln' ],
             [ 'Euro' ],
             [ 'Polish Zloty' ],
-            [ 'CIA' ],
             [ 'FBI' ],
             [ 'USA' ],
+            [ '5,5' ],
+            [ '1,2.3', ],
+            [ '2.' ],
+            [ log(0) ],
+            [ acos(1.01) ],
         ];
     }
 }

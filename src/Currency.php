@@ -18,7 +18,11 @@ final class Currency
      */
     public function __construct($code)
     {
-        $this->setCode($code);
+        if (!is_string($code)
+            || !array_key_exists($code, Intl::getCurrencyBundle()->getCurrencyNames())) {
+            throw new \InvalidArgumentException();
+        }
+        $this->code = $code;
 
         $this->fractionDigits = (int) Intl::getCurrencyBundle()->getFractionDigits($this->code);
 
@@ -43,19 +47,5 @@ final class Currency
     public function getFractionDigits()
     {
         return $this->fractionDigits;
-    }
-
-    /**
-     * @param string $code
-     * @throws \InvalidArgumentException
-     */
-    private function setCode($code)
-    {
-        if (!is_string($code)
-            || !array_key_exists($code, Intl::getCurrencyBundle()->getCurrencyNames())) {
-            throw new \InvalidArgumentException('Currency code is invalid');
-        }
-
-        $this->code = $code;
     }
 }
