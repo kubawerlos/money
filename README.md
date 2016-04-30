@@ -1,12 +1,19 @@
 KubaWerlos / Money
 ==================
 
-[![Latest stable version](https://poser.pugx.org/kubawerlos/money/v/stable)](https://packagist.org/packages/kubawerlos/money)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg)](https://php.net)
-[![Travis CI build](https://travis-ci.org/kubawerlos/money.svg?branch=master)](https://travis-ci.org/kubawerlos/money)
-[![Scrutinizer quality score](https://scrutinizer-ci.com/g/kubawerlos/money/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kubawerlos/money/code-structure/master)
-[![Scrutinizer code coverage](https://scrutinizer-ci.com/g/kubawerlos/money/badges/coverage.png?b=master)](https://php.net/)
+[![Latest Stable Version](https://poser.pugx.org/kubawerlos/money/v/stable)](https://packagist.org/packages/kubawerlos/money)
+[![Total Downloads](https://poser.pugx.org/kubawerlos/money/downloads)](https://packagist.org/packages/kubawerlos/money)
+[![Latest Unstable Version](https://poser.pugx.org/kubawerlos/money/v/unstable)](https://packagist.org/packages/kubawerlos/money)
 [![License](https://poser.pugx.org/kubawerlos/money/license)](https://packagist.org/packages/kubawerlos/money)
+
+[![Build Status](https://travis-ci.org/kubawerlos/money.svg?branch=master)](https://travis-ci.org/kubawerlos/money)
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kubawerlos/money/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kubawerlos/money/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/kubawerlos/money/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kubawerlos/money/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/kubawerlos/money/badges/build.png?b=master)](https://scrutinizer-ci.com/g/kubawerlos/money/build-status/master)
+
+[![Code Climate](https://codeclimate.com/github/kubawerlos/money/badges/gpa.svg)](https://codeclimate.com/github/kubawerlos/money)
+[![Issue Count](https://codeclimate.com/github/kubawerlos/money/badges/issue_count.svg)](https://codeclimate.com/github/kubawerlos/money)
 
 Simple implementation of Money Value Object
 
