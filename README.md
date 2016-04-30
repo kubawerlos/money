@@ -25,9 +25,13 @@ Usage
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
-$tenEuro = new Money(10, new Currency('EUR'));
+$fiveEuro = new Money(5, new Currency('EUR'));
 
-$twentyEuro = $tenEuro->add($tenEuro);
+$tenEuro = $fiveEuro->add($fiveEuro);
 
-assert($twentyEuro->isEqual(new Money(20.00, new Currency('EUR'))));
+$fiveEuro->multiply(2)->isEqual($tenEuro);
+
+$tenEuro->subtract($fiveEuro)->isEqual($fiveEuro);
+
+$tenEuro->divide(2)->isEqual($fiveEuro);
 ```
