@@ -64,21 +64,6 @@ final class Money
     }
 
     /**
-     * @param Money $money
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
-     * @return self
-     */
-    public function subtract(self $money)
-    {
-        if (!$this->isInTheSameCurrency($money)) {
-            throw new \InvalidArgumentException();
-        }
-
-        return $this->returnCalculation($this->subunitAmount - $money->subunitAmount);
-    }
-
-    /**
      * @param int|float $multiplier
      * @throws \InvalidArgumentException
      * @throws \RangeException
@@ -87,6 +72,17 @@ final class Money
     public function multiply($multiplier)
     {
         return $this->returnCalculation($this->subunitAmount * $multiplier);
+    }
+
+    /**
+     * @param Money $money
+     * @throws \InvalidArgumentException
+     * @throws \RangeException
+     * @return self
+     */
+    public function subtract(self $money)
+    {
+        return $this->add($money->multiply(-1));
     }
 
     /**
