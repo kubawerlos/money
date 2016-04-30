@@ -16,7 +16,9 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      */
     public function validCurrency($code)
     {
-        $this->assertInstanceOf(Currency::class, new Currency($code));
+        $currency = new Currency($code);
+
+        $this->assertInstanceOf(Currency::class, $currency);
     }
 
     /**
