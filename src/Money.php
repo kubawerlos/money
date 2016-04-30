@@ -17,7 +17,9 @@ final class Money
      */
     public function __construct($unitAmount, Currency $currency)
     {
-        $this->subunitAmount = (new Converter($currency))->getSubunitFromUnit($unitAmount);
+        $converter = new Converter($currency);
+
+        $this->subunitAmount = $converter->getSubunitFromUnit($unitAmount);
         $this->currency = $currency;
     }
 
