@@ -81,7 +81,7 @@ class GetSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
             [ '7 Dollars', 'USD' ],
             [ '01', 'USD' ],
             [ '00.5', 'USD' ],
-//            [ '-00.99', 'USD' ], // TODO: fix this
+            [ '-00.99', 'USD' ],
             [ '0.500', 'USD' ],
             [ '12.', 'USD' ],
             [ '1/2', 'USD' ],

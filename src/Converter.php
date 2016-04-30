@@ -78,6 +78,6 @@ class Converter
             $pattern .= sprintf('(\.\d{1,%d})?', $this->currency->getFractionDigits());
         }
 
-        return preg_match('/^' . $pattern . '$/', $unitAmount) > 0 && preg_match('/^0\d+/', $unitAmount) === 0;
+        return preg_match('/^' . $pattern . '$/', $unitAmount) > 0 && preg_match('/^-?0\d+/', $unitAmount) === 0;
     }
 }
