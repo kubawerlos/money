@@ -86,11 +86,13 @@ class GetSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
             [ '12.', 'USD' ],
             [ '1/2', 'USD' ],
             [ '5,5', 'USD' ],
+            [ '1.2.3', 'USD' ],
             [ '1,2.3', 'USD' ],
             [ log(0), 'USD' ],
             [ acos(1.01), 'USD' ],
             [ '0.5', 'HUF' ],
             [ '2.', 'HUF' ],
+            [ '--4', 'HUF' ],
         ];
     }
 }
