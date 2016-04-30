@@ -1,5 +1,5 @@
 install:
-    - composer install --no-interaction --prefer-source
+    - composer install --no-interaction
 
 language: php
 
@@ -13,6 +13,6 @@ php:
     - nightly
 
 script:
-    - ./bin/phpunit
+    - ./bin/phpunit --no-coverage
 
 sudo: false
