@@ -72,12 +72,10 @@ class Converter
      */
     private function isValidUnitAmountString($unitAmount)
     {
-        $pattern = '-?\d+';
+        $fractionsPart = $this->currency->getFractionDigits() > 0
+            ? sprintf('(\.\d{1,%d})?', $this->currency->getFractionDigits())
+            : '';
 
-        if ($this->currency->getFractionDigits() > 0) {
-            $pattern .= sprintf('(\.\d{1,%d})?', $this->currency->getFractionDigits());
-        }
-
-        return preg_match('/^' . $pattern . '$/', $unitAmount) > 0 && preg_match('/^-?0\d+/', $unitAmount) === 0;
+        return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionsPart), $unitAmount);
     }
 }
