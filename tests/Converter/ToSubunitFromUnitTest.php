@@ -14,17 +14,19 @@ class ToSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctConversionProvider
+     * @param int $expectedSubunit
+     * @param string $unit
      * @param string $currencyCode
-     * @param int $unit
-     * @param string $expectedSubunit
      * @test
      */
-    public function correctConversion($currencyCode, $unit, $expectedSubunit)
+    public function correctConversion($expectedSubunit, $unit, $currencyCode)
     {
-        $converter = new Converter(new Currency($currencyCode));
-        $converted = $converter->toSubunitFromUnit($unit);
+        $currency = new Currency($currencyCode);
+        $converter = new Converter($currency);
 
-        $this->assertSame($expectedSubunit, $converted);
+        $actualSubunit = $converter->toSubunitFromUnit($unit);
+
+        $this->assertSame($expectedSubunit, $actualSubunit);
     }
 
     /**
@@ -33,27 +35,28 @@ class ToSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
     public function correctConversionProvider()
     {
         return [
-            [ 'USD', '0', 0 ],
-            [ 'USD', '1', 100 ],
-            [ 'USD', '1.99', 199 ],
-            [ 'USD', '-1055', -105500 ],
-            [ 'USD', '-2.55', -255 ],
-            [ 'USD', '100000', 10000000 ],
-            [ 'HUF', '0', 0 ],
-            [ 'HUF', '20', 20 ],
-            [ 'HUF', '-500', -500 ],
+            [ 0, '0', 'USD' ],
+            [ 50, '0.5', 'USD' ],
+            [ 199, '1.99', 'USD' ],
+            [ -105500, '-1055', 'USD' ],
+            [ -255, '-2.55', 'USD' ],
+            [ 10000000, '100000', 'USD' ],
+            [ 0, '0', 'HUF' ],
+            [ 20, '20', 'HUF' ],
+            [ -500, '-500', 'HUF' ],
         ];
     }
 
     /**
      * @dataProvider throwInvalidArgumentExceptionForNotCorrectConversionProvider
+     * @param mixed $unit
      * @param string $currencyCode
-     * @param int $unit
      * @test
      */
-    public function throwInvalidArgumentExceptionForNotCorrectConversion($currencyCode, $unit)
+    public function throwInvalidArgumentExceptionForNotCorrectConversion($unit, $currencyCode)
     {
-        $converter = new Converter(new Currency($currencyCode));
+        $currency = new Currency($currencyCode);
+        $converter = new Converter($currency);
 
         $this->expectException(\InvalidArgumentException::class);
 
@@ -67,11 +70,27 @@ class ToSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
     public function throwInvalidArgumentExceptionForNotCorrectConversionProvider()
     {
         return [
-            [ 'USD', null ],
-            [ 'USD', true ],
-            [ 'USD', false ],
-            [ 'USD', log(0)],
-            [ 'HUF', '0.5' ],
+            [ null, 'USD' ],
+            [ true, 'USD' ],
+            [ false, 'USD' ],
+            [ '', 'USD' ],
+            [ 'abc', 'USD' ],
+            [ [1, 2], 'USD' ],
+            [ 123.456, 'USD' ],
+            [ -12.345, 'USD' ],
+            [ '7 Dollars', 'USD' ],
+            [ '01', 'USD' ],
+            [ '00.5', 'USD' ],
+//            [ '-00.99', 'USD' ], // TODO: fix this
+            [ '0.500', 'USD' ],
+            [ '12.', 'USD' ],
+            [ '1/2', 'USD' ],
+            [ '5,5', 'USD' ],
+            [ '1,2.3', 'USD' ],
+            [ log(0), 'USD' ],
+            [ acos(1.01), 'USD' ],
+            [ '0.5', 'HUF' ],
+            [ '2.', 'HUF' ],
         ];
     }
 }
