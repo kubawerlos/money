@@ -7,10 +7,10 @@ use KubaWerlos\Money\Currency;
 
 /**
  * @covers \KubaWerlos\Money\Converter::__construct
- * @covers \KubaWerlos\Money\Converter::toSubunitFromUnit
+ * @covers \KubaWerlos\Money\Converter::getSubunitFromUnit
  * @covers \KubaWerlos\Money\Converter::<private>
  */
-class ToSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
+class GetSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctConversionProvider
@@ -24,7 +24,7 @@ class ToSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency($currencyCode);
         $converter = new Converter($currency);
 
-        $actualSubunit = $converter->toSubunitFromUnit($unit);
+        $actualSubunit = $converter->getSubunitFromUnit($unit);
 
         $this->assertSame($expectedSubunit, $actualSubunit);
     }
@@ -60,7 +60,7 @@ class ToSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $converter->toSubunitFromUnit($unit);
+        $converter->getSubunitFromUnit($unit);
 
     }
 

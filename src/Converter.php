@@ -20,7 +20,7 @@ class Converter
      * @throws \InvalidArgumentException
      * @return string
      */
-    public function toUnitFromSubunit($subunitAmount)
+    public function getUnitFromSubunit($subunitAmount)
     {
         if (!is_int($subunitAmount)) {
             throw new \InvalidArgumentException();
@@ -39,7 +39,7 @@ class Converter
      * @throws \InvalidArgumentException
      * @return int
      */
-    public function toSubunitFromUnit($unitAmount)
+    public function getSubunitFromUnit($unitAmount)
     {
         if (is_int($unitAmount) || is_float($unitAmount)) {
             $unitAmount = (string) $unitAmount;

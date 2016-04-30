@@ -17,7 +17,7 @@ final class Money
      */
     public function __construct($unitAmount, Currency $currency)
     {
-        $this->subunitAmount = (new Converter($currency))->toSubunitFromUnit($unitAmount);
+        $this->subunitAmount = (new Converter($currency))->getSubunitFromUnit($unitAmount);
         $this->currency = $currency;
     }
 
@@ -26,7 +26,7 @@ final class Money
      */
     public function getAmount()
     {
-        return (new Converter($this->currency))->toUnitFromSubunit($this->subunitAmount);
+        return (new Converter($this->currency))->getUnitFromSubunit($this->subunitAmount);
     }
 
     /**
@@ -89,6 +89,6 @@ final class Money
             throw new \RangeException();
         }
 
-        return new self((new Converter($this->currency))->toUnitFromSubunit($subunitAmount), $this->currency);
+        return new self((new Converter($this->currency))->getUnitFromSubunit($subunitAmount), $this->currency);
     }
 }
