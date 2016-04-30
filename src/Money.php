@@ -56,7 +56,11 @@ final class Money
      */
     public function add(self $money)
     {
-        return $this->calculate($money, 1);
+        if (!$this->isInTheSameCurrency($money)) {
+            throw new \InvalidArgumentException();
+        }
+
+        return $this->returnCalculation($this->subunitAmount + $money->subunitAmount);
     }
 
     /**
@@ -67,28 +71,40 @@ final class Money
      */
     public function subtract(self $money)
     {
-        return $this->calculate($money, -1);
-    }
-
-    /**
-     * @param Money $money
-     * @param int $factor
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
-     * @return self
-     */
-    private function calculate(self $money, $factor)
-    {
         if (!$this->isInTheSameCurrency($money)) {
             throw new \InvalidArgumentException();
         }
 
-        $subunitAmount = $this->subunitAmount + $factor * $money->subunitAmount;
+        return $this->returnCalculation($this->subunitAmount - $money->subunitAmount);
+    }
 
-        if (!is_int($subunitAmount)) {
+    /**
+     * @param int|float $multiplier
+     * @throws \InvalidArgumentException
+     * @throws \RangeException
+     * @return self
+     */
+    public function multiply($multiplier)
+    {
+        return $this->returnCalculation($this->subunitAmount * $multiplier);
+    }
+
+    /**
+     * @param int $subunitAmount
+     * @throws \InvalidArgumentException
+     * @throws \RangeException
+     * @return self
+     */
+    private function returnCalculation($subunitAmount)
+    {
+        if ($subunitAmount < PHP_INT_MIN || PHP_INT_MAX < $subunitAmount) {
             throw new \RangeException();
         }
 
-        return new self((new Converter($this->currency))->getUnitFromSubunit($subunitAmount), $this->currency);
+        $converter = new Converter($this->currency);
+
+        $unitAmount = $converter->getUnitFromSubunit((int) $subunitAmount);
+
+        return new self($unitAmount, $this->currency);
     }
 }
