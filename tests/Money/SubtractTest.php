@@ -13,14 +13,22 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctSubtractionProvider
-     * @param Money $base
-     * @param Money $subtracted
-     * @param Money $expected
+     * @param string $expectedAmount
+     * @param string $baseAmount
+     * @param string $addedAmount
+     * @param string $currencyCode
      * @test
      */
-    public function correctSubtraction(Money $base, Money $subtracted, Money $expected)
+    public function correctSubtraction($expectedAmount, $baseAmount , $addedAmount, $currencyCode)
     {
-        $this->assertTrue($expected->isEqual($base->subtract($subtracted)));
+        $currency = new Currency($currencyCode);
+        $expectedMoney = new Money($expectedAmount, $currency);
+        $baseMoney = new Money($baseAmount, $currency);
+        $addedMoney = new Money($addedAmount, $currency);
+
+        $actualMoney = $baseMoney->subtract($addedMoney);
+
+        $this->assertTrue($expectedMoney->isEqual($actualMoney));
     }
 
     /**
@@ -29,34 +37,31 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
     public function correctSubtractionProvider()
     {
         return [
-            [
-                new Money(4, new Currency('USD')),
-                new Money(2, new Currency('USD')),
-                new Money(2, new Currency('USD')),
-            ],
-            [
-                new Money(5.55, new Currency('USD')),
-                new Money(5.55, new Currency('USD')),
-                new Money(0, new Currency('USD')),
-            ],
-            [
-                new Money(3.33, new Currency('USD')),
-                new Money(2.22, new Currency('USD')),
-                new Money(1.11, new Currency('USD')),
-            ],
+            [ 2, 4, 2, 'USD' ],
+            [ 0, 5.55, 5.55, 'EUR' ],
+            [ 1.11, 3.33, 2.22, 'PLN' ],
+            [ -0.01, 999999.99, 1000000, 'TRY' ],
         ];
     }
 
     /**
      * @dataProvider incorrectSubtractionProvider
-     * @param Money $base
-     * @param Money $subtracted
-     * @param Money $expected
+     * @param string $expectedAmount
+     * @param string $baseAmount
+     * @param string $addedAmount
+     * @param string $currencyCode
      * @test
      */
-    public function incorrectSubtraction(Money $base, Money $subtracted, Money $expected)
+    public function incorrectSubtraction($expectedAmount, $baseAmount , $addedAmount, $currencyCode)
     {
-        $this->assertFalse($expected->isEqual($base->subtract($subtracted)));
+        $currency = new Currency($currencyCode);
+        $expectedMoney = new Money($expectedAmount, $currency);
+        $baseMoney = new Money($baseAmount, $currency);
+        $addedMoney = new Money($addedAmount, $currency);
+
+        $actualMoney = $baseMoney->subtract($addedMoney);
+
+        $this->assertFalse($expectedMoney->isEqual($actualMoney));
     }
 
     /**
@@ -65,47 +70,24 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
     public function incorrectSubtractionProvider()
     {
         return [
-            [
-                new Money(5, new Currency('USD')),
-                new Money(2, new Currency('USD')),
-                new Money(2, new Currency('USD')),
-            ],
-            [
-                new Money(3.50, new Currency('USD')),
-                new Money(2.50, new Currency('USD')),
-                new Money(1.50, new Currency('USD')),
-            ],
+            [ 2, 5, 2, 'USD' ],
+            [ 1.50, 3.50, 2.50, 'EUR' ],
+            [ 0, 1000000, 999999.99, 'PLN' ],
+            [ -2, 999999, 1000000, 'HUF' ],
         ];
     }
 
     /**
-     * @dataProvider throwInvalidArgumentExceptionForNotMatchingCurrenciesProvider
-     * @param Money $base
-     * @param Money $subtracted
      * @test
      */
-    public function throwInvalidArgumentExceptionForNotMatchingCurrencies(Money $base, Money $subtracted)
+    public function throwInvalidArgumentExceptionForNotMatchingCurrencies()
     {
+        $moneyEuro = new Money(10, new Currency('EUR'));
+        $moneyDollars = new Money(10, new Currency('USD'));
+
         $this->expectException(\InvalidArgumentException::class);
 
-        $base->subtract($subtracted);
-    }
-
-    /**
-     * @return array
-     */
-    public function throwInvalidArgumentExceptionForNotMatchingCurrenciesProvider()
-    {
-        return [
-            [
-                new Money(2, new Currency('EUR')),
-                new Money(2, new Currency('USD')),
-            ],
-            [
-                new Money(2, new Currency('USD')),
-                new Money(2, new Currency('EUR')),
-            ],
-        ];
+        $moneyEuro->subtract($moneyDollars);
     }
 
     /**
@@ -113,10 +95,11 @@ class SubtractTest extends \PHPUnit_Framework_TestCase
      */
     public function throwsRangeExceptionWhenResultIsTooSmall()
     {
-        $money = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
+        $moneySmall = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
+        $moneyLarge = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
         $this->expectException(\RangeException::class);
 
-        $money->subtract(new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD')));
+        $moneySmall->subtract($moneyLarge);
     }
 }

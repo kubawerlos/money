@@ -12,12 +12,17 @@ class IsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider sameCurrencyProvider
-     * @param Money $money1
-     * @param Money $money2
+     * @param int|float|string $amount1
+     * @param int|float|string $amount2
+     * @param string $currencyCode
      * @test
      */
-    public function sameCurrency(Money $money1, Money $money2)
+    public function sameCurrency($amount1, $amount2, $currencyCode)
     {
+        $currency = new Currency($currencyCode);
+        $money1 = new Money($amount1, $currency);
+        $money2 = new Money($amount2, $currency);
+
         $this->assertTrue($money1->isInTheSameCurrency($money1));
         $this->assertTrue($money1->isInTheSameCurrency($money2));
         $this->assertTrue($money2->isInTheSameCurrency($money1));
@@ -29,29 +34,27 @@ class IsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
     public function sameCurrencyProvider()
     {
         return [
-            [
-                new Money(10, new Currency('USD')),
-                new Money(50, new Currency('USD')),
-            ],
-            [
-                new Money(5.5, new Currency('EUR')),
-                new Money(200, new Currency('EUR')),
-            ],
-            [
-                new Money(-2, new Currency('EUR')),
-                new Money(22, new Currency('EUR')),
-            ],
+            [ 10, 50, 'USD' ],
+            [ 5.5, 200, 'EUR' ],
+            [ 6, -800, 'HUF' ],
         ];
     }
 
     /**
      * @dataProvider notSameCurrencyProvider
-     * @param Money $money1
-     * @param Money $money2
+     * @param int|float|string $amount1
+     * @param int|float|string $amount2
+     * @param string $currencyCode1
+     * @param string $currencyCode2
      * @test
      */
-    public function notSameCurrency(Money $money1, Money $money2)
+    public function notSameCurrency($amount1, $amount2, $currencyCode1, $currencyCode2)
     {
+        $currency1 = new Currency($currencyCode1);
+        $currency2 = new Currency($currencyCode2);
+        $money1 = new Money($amount1, $currency1);
+        $money2 = new Money($amount2, $currency2);
+
         $this->assertFalse($money1->isInTheSameCurrency($money2));
         $this->assertFalse($money2->isInTheSameCurrency($money1));
     }
@@ -62,18 +65,9 @@ class IsInTheSameCurrencyTest extends \PHPUnit_Framework_TestCase
     public function notSameCurrencyProvider()
     {
         return [
-            [
-                new Money(10, new Currency('USD')),
-                new Money(10, new Currency('EUR')),
-            ],
-            [
-                new Money(100, new Currency('USD')),
-                new Money(100, new Currency('EUR')),
-            ],
-            [
-                new Money(55, new Currency('USD')),
-                new Money(-5, new Currency('EUR')),
-            ],
+            [ 10, 10, 'USD', 'EUR' ],
+            [ 100, 100, 'USD', 'EUR' ],
+            [ 55, -3, 'HUF', 'TRY' ],
         ];
     }
 }

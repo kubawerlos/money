@@ -12,13 +12,19 @@ class GetAmountTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getAmountFormatProvider
-     * @param float|int|string $amount
-     * @param Money $money
+     * @param string $expectedAmount
+     * @param int|float|string $unitAmount
+     * @param string $currencyCode
      * @test
      */
-    public function getAmountFormat($amount, Money $money)
+    public function getAmountFormat($expectedAmount, $unitAmount, $currencyCode)
     {
-        $this->assertSame($amount, $money->getAmount());
+        $currency = new Currency($currencyCode);
+        $money = new Money($unitAmount, $currency);
+
+        $amount = $money->getAmount();
+
+        $this->assertSame($expectedAmount, $amount);
     }
 
     /**
@@ -27,15 +33,16 @@ class GetAmountTest extends \PHPUnit_Framework_TestCase
     public function getAmountFormatProvider()
     {
         return [
-            [ '0.00', new Money(0, new Currency('USD')) ],
-            [ '1.00', new Money(1, new Currency('EUR')) ],
-            [ '1.99', new Money(1.99, new Currency('PLN')) ],
-            [ '-5.00', new Money(-5, new Currency('USD')) ],
-            [ '-2.55', new Money(-2.55, new Currency('USD')) ],
-            [ '1000.00', new Money(1000, new Currency('USD')) ],
-            [ '0', new Money(0, new Currency('HUF')) ],
-            [ '20', new Money(20, new Currency('HUF')) ],
-            [ '-7', new Money(-7, new Currency('HUF')) ],
+            [ '0.00', 0, 'USD'],
+            [ '1.00', 1, 'EUR'],
+            [ '1.80', 1.8, 'PLN'],
+            [ '1.99', 1.99, 'PLN'],
+            [ '-5.00', -5, 'USD'],
+            [ '-2.55', '-2.55', 'USD'],
+            [ '1000.00', 1000, 'USD'],
+            [ '0', '0', 'HUF'],
+            [ '20', 20, 'HUF'],
+            [ '-7', -7, 'HUF'],
         ];
     }
 }
