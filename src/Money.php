@@ -97,7 +97,8 @@ final class Money
      */
     private function returnCalculation($subunitAmount)
     {
-        if ($subunitAmount < PHP_INT_MIN || PHP_INT_MAX < $subunitAmount) {
+        // ~PHP_INT_MAX instead of PHP_INT_MIN for PHP 5.6
+        if ($subunitAmount < ~PHP_INT_MAX || PHP_INT_MAX < $subunitAmount) {
             throw new \RangeException();
         }
 
