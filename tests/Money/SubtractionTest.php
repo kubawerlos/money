@@ -85,7 +85,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $moneyEuro = new Money(10, new Currency('EUR'));
         $moneyDollars = new Money(10, new Currency('USD'));
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException('InvalidArgumentException');
 
         $moneyEuro->subtract($moneyDollars);
     }
@@ -98,7 +98,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $moneySmall = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
         $moneyLarge = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->setExpectedException(\RangeException::class);
+        $this->setExpectedException('RangeException');
 
         $moneySmall->subtract($moneyLarge);
     }

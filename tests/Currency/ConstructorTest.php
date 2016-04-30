@@ -18,7 +18,7 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
     {
         $currency = new Currency($code);
 
-        $this->assertInstanceOf(Currency::class, $currency);
+        $this->assertInstanceOf('KubaWerlos\Money\Currency', $currency);
     }
 
     /**
@@ -47,7 +47,7 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForInvalidCurrency($code)
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException('InvalidArgumentException');
 
         new Currency($code);
     }

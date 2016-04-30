@@ -87,7 +87,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
         $moneyEuro = new Money(10, new Currency('EUR'));
         $moneyDollars = new Money(10, new Currency('USD'));
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException('InvalidArgumentException');
 
         $moneyEuro->add($moneyDollars);
     }
@@ -99,7 +99,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->setExpectedException(\RangeException::class);
+        $this->setExpectedException('RangeException');
 
         $money->add($money);
     }

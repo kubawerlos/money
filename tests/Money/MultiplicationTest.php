@@ -84,7 +84,7 @@ class MultiplicationTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->setExpectedException(\RangeException::class);
+        $this->setExpectedException('RangeException');
 
         $money->multiply(1000);
     }
@@ -96,7 +96,7 @@ class MultiplicationTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
 
-        $this->setExpectedException(\RangeException::class);
+        $this->setExpectedException('RangeException');
 
         $money->multiply(1000);
     }

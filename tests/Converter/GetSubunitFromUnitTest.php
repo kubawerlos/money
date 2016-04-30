@@ -58,7 +58,7 @@ class GetSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency($currencyCode);
         $converter = new Converter($currency);
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException('InvalidArgumentException');
 
         $converter->getSubunitFromUnit($unit);
     }
