@@ -36,12 +36,12 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
      */
     public function correctSubtractionProvider()
     {
-        return [
-            [ 2, 4, 2, 'USD' ],
-            [ 0, 5.55, 5.55, 'EUR' ],
-            [ 1.11, 3.33, 2.22, 'PLN' ],
-            [ -0.01, 999999.99, 1000000, 'TRY' ],
-        ];
+        return array(
+            array( 2, 4, 2, 'USD' ),
+            array( 0, 5.55, 5.55, 'EUR' ),
+            array( 1.11, 3.33, 2.22, 'PLN' ),
+            array( -0.01, 999999.99, 1000000, 'TRY' ),
+        );
     }
 
     /**
@@ -69,12 +69,12 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
      */
     public function incorrectSubtractionProvider()
     {
-        return [
-            [ 2, 5, 2, 'USD' ],
-            [ 1.50, 3.50, 2.50, 'EUR' ],
-            [ 0, 1000000, 999999.99, 'PLN' ],
-            [ -2, 999999, 1000000, 'HUF' ],
-        ];
+        return array(
+            array( 2, 5, 2, 'USD' ),
+            array( 1.50, 3.50, 2.50, 'EUR' ),
+            array( 0, 1000000, 999999.99, 'PLN' ),
+            array( -2, 999999, 1000000, 'HUF' ),
+        );
     }
 
     /**
@@ -85,7 +85,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $moneyEuro = new Money(10, new Currency('EUR'));
         $moneyDollars = new Money(10, new Currency('USD'));
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
 
         $moneyEuro->subtract($moneyDollars);
     }
@@ -98,7 +98,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $moneySmall = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
         $moneyLarge = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->expectException(\RangeException::class);
+        $this->setExpectedException(\RangeException::class);
 
         $moneySmall->subtract($moneyLarge);
     }

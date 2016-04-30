@@ -32,17 +32,17 @@ class GetAmountTest extends \PHPUnit_Framework_TestCase
      */
     public function getAmountFormatProvider()
     {
-        return [
-            [ '0.00', 0, 'USD'],
-            [ '1.00', 1, 'EUR'],
-            [ '1.80', 1.8, 'PLN'],
-            [ '1.99', 1.99, 'PLN'],
-            [ '-5.00', -5, 'USD'],
-            [ '-2.55', '-2.55', 'USD'],
-            [ '1000.00', 1000, 'USD'],
-            [ '0', '0', 'HUF'],
-            [ '20', 20, 'HUF'],
-            [ '-7', -7, 'HUF'],
-        ];
+        return array(
+            array( '0.00', 0, 'USD'),
+            array( '1.00', 1, 'EUR'),
+            array( '1.80', 1.8, 'PLN'),
+            array( '1.99', 1.99, 'PLN'),
+            array( '-5.00', -5, 'USD'),
+            array( '-2.55', '-2.55', 'USD'),
+            array( '1000.00', 1000, 'USD'),
+            array( '0', '0', 'HUF'),
+            array( '20', 20, 'HUF'),
+            array( '-7', -7, 'HUF'),
+        );
     }
 }

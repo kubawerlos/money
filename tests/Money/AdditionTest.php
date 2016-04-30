@@ -36,14 +36,14 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
      */
     public function correctAdditionProvider()
     {
-        return [
-            [ 4, 2, 2, 'USD' ],
-            [ 36.49, 25.50, 10.99, 'EUR' ],
-            [ 26.60, 16.40, 10.20, 'PLN' ],
-            [ 38.30, 46.40, -8.10, 'TRY' ],
-            [ 0, -8.00, 8, 'AUD' ],
-            [ 4, 6, -2, 'HUF' ],
-        ];
+        return array(
+            array( 4, 2, 2, 'USD' ),
+            array( 36.49, 25.50, 10.99, 'EUR' ),
+            array( 26.60, 16.40, 10.20, 'PLN' ),
+            array( 38.30, 46.40, -8.10, 'TRY' ),
+            array( 0, -8.00, 8, 'AUD' ),
+            array( 4, 6, -2, 'HUF' ),
+        );
     }
 
     /**
@@ -71,12 +71,12 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
      */
     public function incorrectAdditionProvider()
     {
-        return [
-            [ 5, 2, 2, 'USD' ],
-            [ 3.50, 1.50, 2.50, 'USD' ],
-            [ 0, 1.50, -1.49, 'USD' ],
-            [ 0, 16.40, -16.39, 'USD' ],
-        ];
+        return array(
+            array( 5, 2, 2, 'USD' ),
+            array( 3.50, 1.50, 2.50, 'USD' ),
+            array( 0, 1.50, -1.49, 'USD' ),
+            array( 0, 16.40, -16.39, 'USD' ),
+        );
     }
 
     /**
@@ -87,7 +87,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
         $moneyEuro = new Money(10, new Currency('EUR'));
         $moneyDollars = new Money(10, new Currency('USD'));
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
 
         $moneyEuro->add($moneyDollars);
     }
@@ -99,7 +99,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->expectException(\RangeException::class);
+        $this->setExpectedException(\RangeException::class);
 
         $money->add($money);
     }

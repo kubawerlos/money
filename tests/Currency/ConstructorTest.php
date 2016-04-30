@@ -26,18 +26,18 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      */
     public function validCurrencyProvider()
     {
-        return [
-            [ 'USD' ],
-            [ 'EUR' ],
-            [ 'PLN' ],
-            [ 'TRY' ],
-            [ 'HUF' ],
-            [ 'JPY' ],
-            [ 'GBP' ],
-            [ 'AUD' ],
-            [ 'CHF' ],
-            [ 'CAD' ],
-        ];
+        return array(
+            array( 'USD' ),
+            array( 'EUR' ),
+            array( 'PLN' ),
+            array( 'TRY' ),
+            array( 'HUF' ),
+            array( 'JPY' ),
+            array( 'GBP' ),
+            array( 'AUD' ),
+            array( 'CHF' ),
+            array( 'CAD' ),
+        );
     }
 
     /**
@@ -47,7 +47,7 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForInvalidCurrency($code)
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->setExpectedException(\InvalidArgumentException::class);
 
         new Currency($code);
     }
@@ -57,25 +57,25 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForInvalidCurrencyProvider()
     {
-        return [
-            [ null ],
-            [ true ],
-            [ false ],
-            [ 42 ],
-            [ 2.5 ],
-            [ [1, 2] ],
-            [ 'USDSuffix' ],
-            [ '' ],
-            [ 'pln' ],
-            [ 'Euro' ],
-            [ 'Polish Zloty' ],
-            [ 'FBI' ],
-            [ 'USA' ],
-            [ '5,5' ],
-            [ '1,2.3', ],
-            [ '2.' ],
-            [ log(0) ],
-            [ acos(1.01) ],
-        ];
+        return array(
+            array( null ),
+            array( true ),
+            array( false ),
+            array( 42 ),
+            array( 2.5 ),
+            array( array(1, 2) ),
+            array( 'USDSuffix' ),
+            array( '' ),
+            array( 'pln' ),
+            array( 'Euro' ),
+            array( 'Polish Zloty' ),
+            array( 'FBI' ),
+            array( 'USA' ),
+            array( '5,5' ),
+            array( '1,2.3', ),
+            array( '2.' ),
+            array( log(0) ),
+            array( acos(1.01) ),
+        );
     }
 }

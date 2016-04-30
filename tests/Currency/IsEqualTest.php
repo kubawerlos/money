@@ -30,10 +30,10 @@ class IsEqualTest extends \PHPUnit_Framework_TestCase
      */
     public function equalCurrenciesProvider()
     {
-        return [
-            [ 'USD', 'USD' ],
-            [ 'HUF', 'HUF' ],
-        ];
+        return array(
+            array( 'USD', 'USD' ),
+            array( 'HUF', 'HUF' ),
+        );
     }
 
     /**
@@ -56,9 +56,9 @@ class IsEqualTest extends \PHPUnit_Framework_TestCase
      */
     public function notEqualCurrenciesProvider()
     {
-        return [
-            [ 'USD', 'EUR' ],
-            [ 'PLN', 'HUF' ],
-        ];
+        return array(
+            array( 'USD', 'EUR' ),
+            array( 'PLN', 'HUF' ),
+        );
     }
 }
