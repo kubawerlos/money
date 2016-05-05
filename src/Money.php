@@ -24,6 +24,7 @@ final class Money
     }
 
     /**
+     * @throws \InvalidArgumentException
      * @return string
      */
     public function getAmount()

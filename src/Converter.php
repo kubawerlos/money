@@ -54,6 +54,7 @@ class Converter
 
     /**
      * @param string $unitAmountString
+     * @throws \InvalidArgumentException
      * @return int
      */
     private function getSubunitFromUnitString($unitAmountString)
@@ -67,7 +68,6 @@ class Converter
 
     /**
      * @param string $unitAmount
-     * @throws \InvalidArgumentException
      * @return bool
      */
     private function isValidUnitAmountString($unitAmount)
@@ -76,6 +76,6 @@ class Converter
             ? sprintf('(\.\d{1,%d})?', $this->currency->getFractionDigits())
             : '';
 
-        return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionsPart), $unitAmount);
+        return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionsPart), $unitAmount) > 0;
     }
 }
