@@ -84,11 +84,11 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function throwRangeExceptionWhenDividingByZero()
+    public function throwInvalidArgumentExceptionWhenDividingByZero()
     {
         $money = new Money(10, new Currency('USD'));
 
-        $this->setExpectedException('RangeException');
+        $this->setExpectedException('InvalidArgumentException');
 
         $money->divide(0);
     }

@@ -98,8 +98,8 @@ final class Money
      */
     public function divide($divisor)
     {
-        if ($divisor == 0) {
-            throw new \RangeException();
+        if ($divisor == 0.0) {
+            throw new \InvalidArgumentException();
         }
 
         return $this->multiply(1 / $divisor);
