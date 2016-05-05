@@ -1,5 +1,5 @@
 install:
-    - composer install --no-interaction
+    - composer install --no-interaction --prefer-source
 
 language: php
 

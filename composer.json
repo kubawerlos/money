@@ -23,7 +23,6 @@
     },
     "config": {
         "bin-dir": "bin",
-        "optimize-autoloader": true,
-        "preferred-install": "source"
+        "optimize-autoloader": true
     }
 }
