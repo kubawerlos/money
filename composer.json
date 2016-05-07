@@ -19,7 +19,8 @@
         "symfony/intl": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "squizlabs/php_codesniffer": "*"
     },
     "config": {
         "bin-dir": "bin",

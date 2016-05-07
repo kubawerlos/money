@@ -17,5 +17,6 @@ php:
 
 script:
     - ./bin/phpunit --no-coverage
+    - ./bin/phpcs --extensions=php --report-full --standard=PSR2 ./src/
 
 sudo: false
