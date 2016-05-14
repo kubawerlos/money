@@ -5,7 +5,7 @@ namespace Tests\Currency;
 use KubaWerlos\Money\Currency;
 
 /**
- * @covers \KubaWerlos\Money\Currency::getFractionDigits
+ * @covers KubaWerlos\Money\Currency::getFractionDigits
  */
 class GetFractionDigitsTest extends \PHPUnit_Framework_TestCase
 {

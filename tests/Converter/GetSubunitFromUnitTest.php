@@ -6,9 +6,9 @@ use KubaWerlos\Money\Converter;
 use KubaWerlos\Money\Currency;
 
 /**
- * @covers \KubaWerlos\Money\Converter::__construct
- * @covers \KubaWerlos\Money\Converter::getSubunitFromUnit
- * @covers \KubaWerlos\Money\Converter::<private>
+ * @covers KubaWerlos\Money\Converter::__construct
+ * @covers KubaWerlos\Money\Converter::getSubunitFromUnit
+ * @covers KubaWerlos\Money\Converter::<private>
  */
 class GetSubunitFromUnitTest extends \PHPUnit_Framework_TestCase
 {

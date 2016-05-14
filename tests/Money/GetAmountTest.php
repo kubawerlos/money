@@ -6,7 +6,7 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::getAmount
+ * @covers KubaWerlos\Money\Money::getAmount
  */
 class GetAmountTest extends \PHPUnit_Framework_TestCase
 {

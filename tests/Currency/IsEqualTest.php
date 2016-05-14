@@ -5,7 +5,7 @@ namespace Tests\Currency;
 use KubaWerlos\Money\Currency;
 
 /**
- * @covers \KubaWerlos\Money\Currency::isEqual
+ * @covers KubaWerlos\Money\Currency::isEqual
  */
 class IsEqualTest extends \PHPUnit_Framework_TestCase
 {

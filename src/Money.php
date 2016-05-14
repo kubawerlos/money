@@ -2,6 +2,9 @@
 
 namespace KubaWerlos\Money;
 
+use InvalidArgumentException;
+use RangeException;
+
 final class Money
 {
     /** @var int */
@@ -13,7 +16,7 @@ final class Money
     /**
      * @param float|int|string $unitAmount
      * @param Currency $currency
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($unitAmount, Currency $currency)
     {
@@ -24,7 +27,7 @@ final class Money
     }
 
     /**
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return string
      */
     public function getAmount()
@@ -55,14 +58,14 @@ final class Money
 
     /**
      * @param Money $money
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
+     * @throws InvalidArgumentException
+     * @throws RangeException
      * @return self
      */
     public function add(self $money)
     {
         if (!$this->isInTheSameCurrency($money)) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         return $this->returnCalculation($this->subunitAmount + $money->subunitAmount);
@@ -70,8 +73,8 @@ final class Money
 
     /**
      * @param int|float $multiplier
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
+     * @throws InvalidArgumentException
+     * @throws RangeException
      * @return self
      */
     public function multiply($multiplier)
@@ -81,8 +84,8 @@ final class Money
 
     /**
      * @param Money $money
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
+     * @throws InvalidArgumentException
+     * @throws RangeException
      * @return self
      */
     public function subtract(self $money)
@@ -92,14 +95,14 @@ final class Money
 
     /**
      * @param int|float $divisor
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
+     * @throws InvalidArgumentException
+     * @throws RangeException
      * @return self
      */
     public function divide($divisor)
     {
         if ($divisor == 0.0) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         return $this->multiply(1 / $divisor);
@@ -107,15 +110,15 @@ final class Money
 
     /**
      * @param int $subunitAmount
-     * @throws \InvalidArgumentException
-     * @throws \RangeException
+     * @throws InvalidArgumentException
+     * @throws RangeException
      * @return self
      */
     private function returnCalculation($subunitAmount)
     {
         // ~PHP_INT_MAX instead of PHP_INT_MIN for PHP < 7
         if ($subunitAmount < ~PHP_INT_MAX || PHP_INT_MAX < $subunitAmount) {
-            throw new \RangeException();
+            throw new RangeException();
         }
 
         $converter = new Converter($this->currency);

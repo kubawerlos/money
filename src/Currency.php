@@ -2,6 +2,7 @@
 
 namespace KubaWerlos\Money;
 
+use InvalidArgumentException;
 use Symfony\Component\Intl\Intl;
 
 final class Currency
@@ -14,13 +15,13 @@ final class Currency
 
     /**
      * @param string $code
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($code)
     {
         if (!is_string($code)
             || !array_key_exists($code, Intl::getCurrencyBundle()->getCurrencyNames())) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
         $this->code = $code;
 

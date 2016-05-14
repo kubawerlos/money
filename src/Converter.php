@@ -2,6 +2,8 @@
 
 namespace KubaWerlos\Money;
 
+use InvalidArgumentException;
+
 class Converter
 {
     /** @var Currency */
@@ -17,13 +19,13 @@ class Converter
 
     /**
      * @param int $subunitAmount
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return string
      */
     public function getUnitFromSubunit($subunitAmount)
     {
         if (!is_int($subunitAmount)) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         return number_format(
@@ -36,7 +38,7 @@ class Converter
 
     /**
      * @param float|int|string $unitAmount
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return int
      */
     public function getSubunitFromUnit($unitAmount)
@@ -46,7 +48,7 @@ class Converter
         }
 
         if (!is_string($unitAmount)) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         return $this->getSubunitFromUnitString($unitAmount);
@@ -54,13 +56,13 @@ class Converter
 
     /**
      * @param string $unitAmountString
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @return int
      */
     private function getSubunitFromUnitString($unitAmountString)
     {
         if (!$this->isValidUnitAmountString($unitAmountString)) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         return (int) round(pow(10, $this->currency->getFractionDigits()) * $unitAmountString);

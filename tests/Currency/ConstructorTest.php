@@ -5,7 +5,7 @@ namespace Tests\Currency;
 use KubaWerlos\Money\Currency;
 
 /**
- * @covers \KubaWerlos\Money\Currency::__construct
+ * @covers KubaWerlos\Money\Currency::__construct
  */
 class ConstructorTest extends \PHPUnit_Framework_TestCase
 {

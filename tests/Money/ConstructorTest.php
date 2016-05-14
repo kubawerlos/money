@@ -6,7 +6,7 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::__construct
+ * @covers KubaWerlos\Money\Money::__construct
  */
 class ConstructorTest extends \PHPUnit_Framework_TestCase
 {

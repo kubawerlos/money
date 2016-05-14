@@ -6,8 +6,8 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::subtract
- * @covers \KubaWerlos\Money\Money::<private>
+ * @covers KubaWerlos\Money\Money::subtract
+ * @covers KubaWerlos\Money\Money::<private>
  */
 class SubtractionTest extends \PHPUnit_Framework_TestCase
 {

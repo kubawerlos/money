@@ -6,8 +6,8 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::divide
- * @covers \KubaWerlos\Money\Money::<private>
+ * @covers KubaWerlos\Money\Money::divide
+ * @covers KubaWerlos\Money\Money::<private>
  */
 class DivisionTest extends \PHPUnit_Framework_TestCase
 {

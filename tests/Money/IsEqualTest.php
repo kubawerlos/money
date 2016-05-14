@@ -6,7 +6,7 @@ use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
 /**
- * @covers \KubaWerlos\Money\Money::isEqual
+ * @covers KubaWerlos\Money\Money::isEqual
  */
 class IsEqualTest extends \PHPUnit_Framework_TestCase
 {
