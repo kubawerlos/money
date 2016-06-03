@@ -37,16 +37,16 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
      */
     public function correctMultiplicationProvider()
     {
-        return array(
-            array( 4, 2, 2, 'USD' ),
-            array( 0, 612.33, 0, 'USD' ),
-            array( 77.77, 11.11, 7, 'EUR' ),
-            array( 123, 100, 1.23, 'PLN' ),
-            array( -160, 80, -2, 'TRY' ),
-            array( 12.34, 123.4, 0.1, 'AUD' ),
-            array( -18, -6, 3, 'ITL' ),
-            array( 30, -5, -6, 'ITL' ),
-        );
+        return [
+            [ 4, 2, 2, 'USD' ],
+            [ 0, 612.33, 0, 'USD' ],
+            [ 77.77, 11.11, 7, 'EUR' ],
+            [ 123, 100, 1.23, 'PLN' ],
+            [ -160, 80, -2, 'TRY' ],
+            [ 12.34, 123.4, 0.1, 'AUD' ],
+            [ -18, -6, 3, 'ITL' ],
+            [ 30, -5, -6, 'ITL' ],
+        ];
     }
 
     /**
@@ -73,10 +73,10 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
      */
     public function incorrectMultiplicationProvider()
     {
-        return array(
-            array( 5, 2, 2, 'USD' ),
-            array( 2.50, 1.50, 2, 'USD' ),
-        );
+        return [
+            [ 5, 2, 2, 'USD' ],
+            [ 2.50, 1.50, 2, 'USD' ],
+        ];
     }
 
     /**

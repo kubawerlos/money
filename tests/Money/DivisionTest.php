@@ -37,20 +37,20 @@ class DivisionTest extends PHPUnit_Framework_TestCase
      */
     public function correctMultiplicationProvider()
     {
-        return array(
-            array( 0, 0, 8, 'USD' ),
-            array( 4.1, 12.3, 3, 'USD' ),
-            array( 12.34, 123.4, 10, 'USD' ),
-            array( 11.11, 77.77, 7, 'USD' ),
-            array( 77.77, 11.11, 1/7, 'EUR' ),
-            array( 1.23, 123, 100, 'PLN' ),
-            array( -160, 80, -0.5, 'TRY' ),
-            array( 8000.01, 16000.02, 2, 'AUD' ),
-            array( 321.42, 642.84, 2, 'AUD' ),
-            array( 0.01, 0.03, 3, 'AUD' ),
-            array( 2, -8, -4, 'ITL' ),
-            array( 3, 5, 2, 'ITL' ),
-        );
+        return [
+            [ 0, 0, 8, 'USD' ],
+            [ 4.1, 12.3, 3, 'USD' ],
+            [ 12.34, 123.4, 10, 'USD' ],
+            [ 11.11, 77.77, 7, 'USD' ],
+            [ 77.77, 11.11, 1/7, 'EUR' ],
+            [ 1.23, 123, 100, 'PLN' ],
+            [ -160, 80, -0.5, 'TRY' ],
+            [ 8000.01, 16000.02, 2, 'AUD' ],
+            [ 321.42, 642.84, 2, 'AUD' ],
+            [ 0.01, 0.03, 3, 'AUD' ],
+            [ 2, -8, -4, 'ITL' ],
+            [ 3, 5, 2, 'ITL' ],
+        ];
     }
 
     /**
@@ -77,10 +77,10 @@ class DivisionTest extends PHPUnit_Framework_TestCase
      */
     public function incorrectMultiplicationProvider()
     {
-        return array(
-            array( 2, 5, 2, 'USD' ),
-            array( 1.24, 2.50, 2, 'USD' ),
-        );
+        return [
+            [ 2, 5, 2, 'USD' ],
+            [ 1.24, 2.50, 2, 'USD' ],
+        ];
     }
 
     /**

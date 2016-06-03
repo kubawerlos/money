@@ -35,18 +35,18 @@ class GetUnitFromSubunitTest extends PHPUnit_Framework_TestCase
      */
     public function correctConversionProvider()
     {
-        return array(
-            array( '0.00', 0, 'USD' ),
-            array( '2.00', 200, 'USD' ),
-            array( '5.50', 550, 'USD' ),
-            array( '-2.55', -255, 'USD' ),
-            array( '12.00', 1200, 'USD' ),
-            array( '1000.00', 100000, 'USD' ),
-            array( '-0.07', -7, 'USD' ),
-            array( '0', 0, 'ITL' ),
-            array( '20', 20, 'ITL' ),
-            array( '-500', -500, 'ITL' ),
-        );
+        return [
+            [ '0.00', 0, 'USD' ],
+            [ '2.00', 200, 'USD' ],
+            [ '5.50', 550, 'USD' ],
+            [ '-2.55', -255, 'USD' ],
+            [ '12.00', 1200, 'USD' ],
+            [ '1000.00', 100000, 'USD' ],
+            [ '-0.07', -7, 'USD' ],
+            [ '0', 0, 'ITL' ],
+            [ '20', 20, 'ITL' ],
+            [ '-500', -500, 'ITL' ],
+        ];
     }
 
     /**
@@ -70,12 +70,12 @@ class GetUnitFromSubunitTest extends PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForNotCorrectConversionProvider()
     {
-        return array(
-            array( null, 'USD' ),
-            array( true, 'EUR' ),
-            array( 0.0, 'PLN' ),
-            array( '10', 'TRY' ),
-            array( '1.99', 'ITL' ),
-        );
+        return [
+            [ null, 'USD' ],
+            [ true, 'EUR' ],
+            [ 0.0, 'PLN' ],
+            [ '10', 'TRY' ],
+            [ '1.99', 'ITL' ],
+        ];
     }
 }

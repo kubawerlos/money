@@ -34,11 +34,11 @@ class IsInTheSameCurrencyTest extends PHPUnit_Framework_TestCase
      */
     public function sameCurrencyProvider()
     {
-        return array(
-            array( 10, 50, 'USD' ),
-            array( 5.5, 200, 'EUR' ),
-            array( 6, -800, 'ITL' ),
-        );
+        return [
+            [ 10, 50, 'USD' ],
+            [ 5.5, 200, 'EUR' ],
+            [ 6, -800, 'ITL' ],
+        ];
     }
 
     /**
@@ -65,10 +65,10 @@ class IsInTheSameCurrencyTest extends PHPUnit_Framework_TestCase
      */
     public function notSameCurrencyProvider()
     {
-        return array(
-            array( 10, 10, 'USD', 'EUR' ),
-            array( 100, 100, 'USD', 'EUR' ),
-            array( 55, -3, 'ITL', 'TRY' ),
-        );
+        return [
+            [ 10, 10, 'USD', 'EUR' ],
+            [ 100, 100, 'USD', 'EUR' ],
+            [ 55, -3, 'ITL', 'TRY' ],
+        ];
     }
 }

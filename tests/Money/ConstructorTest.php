@@ -32,22 +32,22 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
      */
     public function validMoneyProvider()
     {
-        return array(
-            array( 0, 'USD' ),
-            array( '0', 'USD' ),
-            array( 0.0, 'USD' ),
-            array( '0.0', 'USD' ),
-            array( 1000, 'EUR' ),
-            array( '1000', 'EUR' ),
-            array( 1.99, 'PLN' ),
-            array( '1.99', 'PLN' ),
-            array( -20, 'ITL' ),
-            array( '-20', 'ITL' ),
-            array( -1.3, 'TRY' ),
-            array( '-1.3', 'TRY' ),
-            array( -1.55, 'TRY' ),
-            array( '-1.55', 'TRY' ),
-        );
+        return [
+            [ 0, 'USD' ],
+            [ '0', 'USD' ],
+            [ 0.0, 'USD' ],
+            [ '0.0', 'USD' ],
+            [ 1000, 'EUR' ],
+            [ '1000', 'EUR' ],
+            [ 1.99, 'PLN' ],
+            [ '1.99', 'PLN' ],
+            [ -20, 'ITL' ],
+            [ '-20', 'ITL' ],
+            [ -1.3, 'TRY' ],
+            [ '-1.3', 'TRY' ],
+            [ -1.55, 'TRY' ],
+            [ '-1.55', 'TRY' ],
+        ];
     }
 
     /**
@@ -70,28 +70,28 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForInvalidAmountProvider()
     {
-        return array(
-            array( null, 'USD' ),
-            array( true, 'USD' ),
-            array( false, 'USD' ),
-            array( '', 'USD' ),
-            array( 'abc', 'USD' ),
-            array( array(1, 2), 'USD' ),
-            array( 123.456, 'USD' ),
-            array( -12.345, 'USD' ),
-            array( '7 Dollars', 'USD' ),
-            array( '01', 'USD' ),
-            array( '00.5', 'USD' ),
-            array( '-00.99', 'USD' ),
-            array( '0.500', 'USD' ),
-            array( '12.', 'USD' ),
-            array( '1/2', 'USD' ),
-            array( '5,5', 'USD' ),
-            array( '1,2.3', 'USD' ),
-            array( log(0), 'USD' ),
-            array( acos(1.01), 'USD' ),
-            array( '0.5', 'ITL' ),
-            array( '2.', 'ITL' ),
-        );
+        return [
+            [ null, 'USD' ],
+            [ true, 'USD' ],
+            [ false, 'USD' ],
+            [ '', 'USD' ],
+            [ 'abc', 'USD' ],
+            [ [1, 2], 'USD' ],
+            [ 123.456, 'USD' ],
+            [ -12.345, 'USD' ],
+            [ '7 Dollars', 'USD' ],
+            [ '01', 'USD' ],
+            [ '00.5', 'USD' ],
+            [ '-00.99', 'USD' ],
+            [ '0.500', 'USD' ],
+            [ '12.', 'USD' ],
+            [ '1/2', 'USD' ],
+            [ '5,5', 'USD' ],
+            [ '1,2.3', 'USD' ],
+            [ log(0), 'USD' ],
+            [ acos(1.01), 'USD' ],
+            [ '0.5', 'ITL' ],
+            [ '2.', 'ITL' ],
+        ];
     }
 }

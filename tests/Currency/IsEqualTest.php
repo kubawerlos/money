@@ -31,10 +31,10 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
      */
     public function equalCurrenciesProvider()
     {
-        return array(
-            array( 'USD', 'USD' ),
-            array( 'ITL', 'ITL' ),
-        );
+        return [
+            [ 'USD', 'USD' ],
+            [ 'ITL', 'ITL' ],
+        ];
     }
 
     /**
@@ -57,9 +57,9 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
      */
     public function notEqualCurrenciesProvider()
     {
-        return array(
-            array( 'USD', 'EUR' ),
-            array( 'PLN', 'ITL' ),
-        );
+        return [
+            [ 'USD', 'EUR' ],
+            [ 'PLN', 'ITL' ],
+        ];
     }
 }

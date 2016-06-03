@@ -34,13 +34,13 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
      */
     public function equalMoneyProvider()
     {
-        return array(
-            array( 0, 0, 'USD' ),
-            array( 1000, 1000, 'EUR' ),
-            array( 2.5, 2.5, 'PLN' ),
-            array( -4, -4, 'TRY' ),
-            array( -1.75, -1.75, 'AUD' ),
-        );
+        return [
+            [ 0, 0, 'USD' ],
+            [ 1000, 1000, 'EUR' ],
+            [ 2.5, 2.5, 'PLN' ],
+            [ -4, -4, 'TRY' ],
+            [ -1.75, -1.75, 'AUD' ],
+        ];
     }
 
     /**
@@ -67,12 +67,12 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
      */
     public function notEqualMoneyProvider()
     {
-        return array(
-            array( 0, 1, 'USD', 'USD' ),
-            array( 2, -2, 'EUR', 'EUR' ),
-            array( 1000.01, 1000.02, 'EUR', 'EUR' ),
-            array( 1000, 1000, 'EUR', 'PLN' ),
-            array( -5, -5, 'TRY', 'ITL' ),
-        );
+        return [
+            [ 0, 1, 'USD', 'USD' ],
+            [ 2, -2, 'EUR', 'EUR' ],
+            [ 1000.01, 1000.02, 'EUR', 'EUR' ],
+            [ 1000, 1000, 'EUR', 'PLN' ],
+            [ -5, -5, 'TRY', 'ITL' ],
+        ];
     }
 }

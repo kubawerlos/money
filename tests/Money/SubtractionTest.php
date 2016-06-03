@@ -39,12 +39,12 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
      */
     public function correctSubtractionProvider()
     {
-        return array(
-            array( 2, 4, 2, 'USD' ),
-            array( 0, 5.55, 5.55, 'EUR' ),
-            array( 1.11, 3.33, 2.22, 'PLN' ),
-            array( -0.01, 999999.99, 1000000, 'TRY' ),
-        );
+        return [
+            [ 2, 4, 2, 'USD' ],
+            [ 0, 5.55, 5.55, 'EUR' ],
+            [ 1.11, 3.33, 2.22, 'PLN' ],
+            [ -0.01, 999999.99, 1000000, 'TRY' ],
+        ];
     }
 
     /**
@@ -72,12 +72,12 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
      */
     public function incorrectSubtractionProvider()
     {
-        return array(
-            array( 2, 5, 2, 'USD' ),
-            array( 1.50, 3.50, 2.50, 'EUR' ),
-            array( 0, 1000000, 999999.99, 'PLN' ),
-            array( -2, 999999, 1000000, 'ITL' ),
-        );
+        return [
+            [ 2, 5, 2, 'USD' ],
+            [ 1.50, 3.50, 2.50, 'EUR' ],
+            [ 0, 1000000, 999999.99, 'PLN' ],
+            [ -2, 999999, 1000000, 'ITL' ],
+        ];
     }
 
     /**
