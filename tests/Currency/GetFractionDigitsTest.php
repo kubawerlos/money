@@ -147,7 +147,7 @@ class GetFractionDigitsTest extends PHPUnit_Framework_TestCase
             array( 2, 'HRD' ),
             array( 2, 'HRK' ),
             array( 2, 'HTG' ),
-            array( 0, 'HUF' ),
+            array( 2, 'HUF' ),
             array( 0, 'IDR' ),
             array( 2, 'IEP' ),
             array( 2, 'ILP' ),

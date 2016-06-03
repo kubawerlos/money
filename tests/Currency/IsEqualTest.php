@@ -33,7 +33,7 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array( 'USD', 'USD' ),
-            array( 'HUF', 'HUF' ),
+            array( 'ITL', 'ITL' ),
         );
     }
 
@@ -59,7 +59,7 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array( 'USD', 'EUR' ),
-            array( 'PLN', 'HUF' ),
+            array( 'PLN', 'ITL' ),
         );
     }
 }

@@ -72,7 +72,7 @@ class IsEqualTest extends PHPUnit_Framework_TestCase
             array( 2, -2, 'EUR', 'EUR' ),
             array( 1000.01, 1000.02, 'EUR', 'EUR' ),
             array( 1000, 1000, 'EUR', 'PLN' ),
-            array( -5, -5, 'TRY', 'HUF' ),
+            array( -5, -5, 'TRY', 'ITL' ),
         );
     }
 }

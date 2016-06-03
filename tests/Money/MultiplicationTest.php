@@ -44,8 +44,8 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
             array( 123, 100, 1.23, 'PLN' ),
             array( -160, 80, -2, 'TRY' ),
             array( 12.34, 123.4, 0.1, 'AUD' ),
-            array( -18, -6, 3, 'HUF' ),
-            array( 30, -5, -6, 'HUF' ),
+            array( -18, -6, 3, 'ITL' ),
+            array( 30, -5, -6, 'ITL' ),
         );
     }
 

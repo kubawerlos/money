@@ -43,9 +43,9 @@ class GetSubunitFromUnitTest extends PHPUnit_Framework_TestCase
             array( -105500, '-1055', 'USD' ),
             array( -255, '-2.55', 'USD' ),
             array( 10000000, '100000', 'USD' ),
-            array( 0, '0', 'HUF' ),
-            array( 20, '20', 'HUF' ),
-            array( -500, '-500', 'HUF' ),
+            array( 0, '0', 'ITL' ),
+            array( 20, '20', 'ITL' ),
+            array( -500, '-500', 'ITL' ),
         );
     }
 
@@ -91,9 +91,9 @@ class GetSubunitFromUnitTest extends PHPUnit_Framework_TestCase
             array( '1,2.3', 'USD' ),
             array( log(0), 'USD' ),
             array( acos(1.01), 'USD' ),
-            array( '0.5', 'HUF' ),
-            array( '2.', 'HUF' ),
-            array( '--4', 'HUF' ),
+            array( '0.5', 'ITL' ),
+            array( '2.', 'ITL' ),
+            array( '--4', 'ITL' ),
         );
     }
 }

@@ -26,11 +26,6 @@ final class Currency
         $this->code = $code;
 
         $this->fractionDigits = (int) Intl::getCurrencyBundle()->getFractionDigits($this->code);
-
-        // fix for Hungarian forint, it does not have subunit
-        if ($this->code === 'HUF') {
-            $this->fractionDigits = 0;
-        }
     }
 
     /**

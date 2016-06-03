@@ -76,7 +76,7 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
             array( 2, 5, 2, 'USD' ),
             array( 1.50, 3.50, 2.50, 'EUR' ),
             array( 0, 1000000, 999999.99, 'PLN' ),
-            array( -2, 999999, 1000000, 'HUF' ),
+            array( -2, 999999, 1000000, 'ITL' ),
         );
     }
 
