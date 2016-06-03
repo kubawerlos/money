@@ -4,12 +4,14 @@ namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
+use PHPUnit_Framework_TestCase;
+use RangeException;
 
 /**
  * @covers KubaWerlos\Money\Money::multiply
  * @covers KubaWerlos\Money\Money::<private>
  */
-class MultiplicationTest extends \PHPUnit_Framework_TestCase
+class MultiplicationTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctMultiplicationProvider
@@ -84,7 +86,7 @@ class MultiplicationTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->setExpectedException('RangeException');
+        $this->expectException(RangeException::class);
 
         $money->multiply(1000);
     }
@@ -96,7 +98,7 @@ class MultiplicationTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
 
-        $this->setExpectedException('RangeException');
+        $this->expectException(RangeException::class);
 
         $money->multiply(1000);
     }

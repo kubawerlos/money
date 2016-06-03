@@ -2,14 +2,16 @@
 
 namespace Tests\Converter;
 
+use InvalidArgumentException;
 use KubaWerlos\Money\Converter;
 use KubaWerlos\Money\Currency;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Converter::__construct
  * @covers KubaWerlos\Money\Converter::getUnitFromSubunit
  */
-class GetUnitFromSubunitTest extends \PHPUnit_Framework_TestCase
+class GetUnitFromSubunitTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctConversionProvider
@@ -58,7 +60,7 @@ class GetUnitFromSubunitTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency($currencyCode);
         $converter = new Converter($currency);
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         $converter->getUnitFromSubunit($subunit);
     }

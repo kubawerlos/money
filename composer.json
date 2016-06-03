@@ -15,12 +15,12 @@
         }
     },
     "require": {
-        "php": ">=5.3",
-        "symfony/intl": "*"
+        "php": "^5.6 || ^7.0",
+        "symfony/intl": "^3.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "squizlabs/php_codesniffer": "*"
+        "phpunit/phpunit": "^5.4",
+        "squizlabs/php_codesniffer": "^2.6"
     },
     "config": {
         "bin-dir": "bin",

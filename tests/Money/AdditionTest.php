@@ -2,14 +2,18 @@
 
 namespace Tests\Money;
 
+use InvalidArgumentException;
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
+use PHPUnit_Framework_TestCase;
+use RangeException;
+
 
 /**
  * @covers KubaWerlos\Money\Money::add
  * @covers KubaWerlos\Money\Money::<private>
  */
-class AdditionTest extends \PHPUnit_Framework_TestCase
+class AdditionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctAdditionProvider
@@ -87,7 +91,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
         $moneyEuro = new Money(10, new Currency('EUR'));
         $moneyDollars = new Money(10, new Currency('USD'));
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         $moneyEuro->add($moneyDollars);
     }
@@ -99,7 +103,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->setExpectedException('RangeException');
+        $this->expectException(RangeException::class);
 
         $money->add($money);
     }

@@ -2,14 +2,17 @@
 
 namespace Tests\Money;
 
+use InvalidArgumentException;
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
+use PHPUnit_Framework_TestCase;
+use RangeException;
 
 /**
  * @covers KubaWerlos\Money\Money::subtract
  * @covers KubaWerlos\Money\Money::<private>
  */
-class SubtractionTest extends \PHPUnit_Framework_TestCase
+class SubtractionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctSubtractionProvider
@@ -85,7 +88,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $moneyEuro = new Money(10, new Currency('EUR'));
         $moneyDollars = new Money(10, new Currency('USD'));
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         $moneyEuro->subtract($moneyDollars);
     }
@@ -98,7 +101,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $moneySmall = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
         $moneyLarge = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
 
-        $this->setExpectedException('RangeException');
+        $this->expectException(RangeException::class);
 
         $moneySmall->subtract($moneyLarge);
     }

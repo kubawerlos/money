@@ -2,14 +2,16 @@
 
 namespace Tests\Money;
 
+use InvalidArgumentException;
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Money::divide
  * @covers KubaWerlos\Money\Money::<private>
  */
-class DivisionTest extends \PHPUnit_Framework_TestCase
+class DivisionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider correctMultiplicationProvider
@@ -88,7 +90,7 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
     {
         $money = new Money(10, new Currency('USD'));
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         $money->divide(0);
     }

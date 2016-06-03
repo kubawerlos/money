@@ -2,12 +2,14 @@
 
 namespace Tests\Currency;
 
+use InvalidArgumentException;
 use KubaWerlos\Money\Currency;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Currency::__construct
  */
-class ConstructorTest extends \PHPUnit_Framework_TestCase
+class ConstructorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider validCurrencyProvider
@@ -47,7 +49,7 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForInvalidCurrency($code)
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
 
         new Currency($code);
     }

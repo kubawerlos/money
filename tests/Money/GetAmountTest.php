@@ -4,11 +4,12 @@ namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Money::getAmount
  */
-class GetAmountTest extends \PHPUnit_Framework_TestCase
+class GetAmountTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getAmountFormatProvider

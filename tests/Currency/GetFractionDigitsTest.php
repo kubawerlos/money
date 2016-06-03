@@ -3,11 +3,12 @@
 namespace Tests\Currency;
 
 use KubaWerlos\Money\Currency;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Currency::getFractionDigits
  */
-class GetFractionDigitsTest extends \PHPUnit_Framework_TestCase
+class GetFractionDigitsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getFractionDigitsProvider

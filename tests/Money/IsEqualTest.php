@@ -4,11 +4,12 @@ namespace Tests\Money;
 
 use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
+use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Money::isEqual
  */
-class IsEqualTest extends \PHPUnit_Framework_TestCase
+class IsEqualTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider equalMoneyProvider
