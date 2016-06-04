@@ -1,5 +1,5 @@
 install:
-    - composer install --no-interaction --prefer-source --ignore-platfom-reqs
+    - composer install --no-interaction --prefer-source --ignore-platform-reqs
 
 language: php
 
