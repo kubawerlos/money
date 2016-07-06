@@ -1,5 +1,6 @@
 install:
-    - composer install --no-interaction --prefer-source
+    - composer install --prefer-source
+    - composer require --dev phpunit/phpunit squizlabs/php_codesniffer
 
 language: php
 
@@ -13,7 +14,7 @@ php:
     - nightly
 
 script:
-    - ./bin/phpunit --no-coverage
-    - ./bin/phpcs --extensions=php --report-full --standard=PSR2 ./src/
+    - ./vendor/bin/phpunit --no-coverage
+    - ./vendor/bin/phpcs --extensions=php --report-full --standard=PSR2 ./src/
 
 sudo: false
