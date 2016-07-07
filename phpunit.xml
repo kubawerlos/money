@@ -2,7 +2,7 @@
 <phpunit backupGlobals='false'
          backupStaticAttributes='false'
          beStrictAboutTestsThatDoNotTestAnything='true'
-         colors='true'
+         bootstrap='vendor/autoload.php'
          convertErrorsToExceptions='true'
          convertNoticesToExceptions='true'
          convertWarningsToExceptions='true'

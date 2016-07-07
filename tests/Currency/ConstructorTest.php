@@ -8,6 +8,7 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Currency::__construct
+ * @covers KubaWerlos\Money\Currency::<private>
  */
 class ConstructorTest extends PHPUnit_Framework_TestCase
 {
