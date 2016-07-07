@@ -119,9 +119,7 @@ final class Money
             throw new RangeException();
         }
 
-        $converter = new Converter($this->currency);
-
-        $unitAmount = $converter->getUnitFromSubunit((int) round($subunitAmount));
+        $unitAmount = (new Converter($this->currency))->getUnitFromSubunit((int) round($subunitAmount));
 
         return new self($unitAmount, $this->currency->getCode());
     }
