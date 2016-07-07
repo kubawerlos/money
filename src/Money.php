@@ -15,20 +15,13 @@ final class Money
 
     /**
      * @param float|int|string $unitAmount
-     * @param Currency|string $currency
+     * @param string $currencyCode
      * @throws InvalidArgumentException
      */
-    public function __construct($unitAmount, $currency)
+    public function __construct($unitAmount, $currencyCode)
     {
-        if (!$currency instanceof Currency) {
-            $currency = new Currency($currency);
-        }
-
-        $this->currency = $currency;
-
-        $converter = new Converter($this->currency);
-
-        $this->subunitAmount = $converter->getSubunitFromUnit($unitAmount);
+        $this->currency = new Currency($currencyCode);
+        $this->subunitAmount = (new Converter($this->currency))->getSubunitFromUnit($unitAmount);
     }
 
     /**
@@ -130,6 +123,6 @@ final class Money
 
         $unitAmount = $converter->getUnitFromSubunit((int) round($subunitAmount));
 
-        return new self($unitAmount, $this->currency);
+        return new self($unitAmount, $this->currency->getCode());
     }
 }

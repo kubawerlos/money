@@ -23,10 +23,9 @@ Usage
 ```php
 <?php
 
-use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 
-$fiveEuro = new Money(5, new Currency('EUR'));
+$fiveEuro = new Money(5, 'EUR');
 
 $tenEuro = $fiveEuro->add($fiveEuro);
 

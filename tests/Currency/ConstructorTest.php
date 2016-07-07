@@ -8,6 +8,7 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers KubaWerlos\Money\Currency::__construct
+ * @covers KubaWerlos\Money\Currency::getCode
  * @covers KubaWerlos\Money\Currency::<private>
  */
 class ConstructorTest extends PHPUnit_Framework_TestCase
@@ -21,7 +22,7 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
     {
         $currency = new Currency($code);
 
-        $this->assertInstanceOf(Currency::class, $currency);
+        $this->assertSame($code, $currency->getCode());
     }
 
     /**
