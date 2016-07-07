@@ -21,7 +21,7 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
     {
         $currency = new Currency($code);
 
-        $this->assertInstanceOf('KubaWerlos\Money\Currency', $currency);
+        $this->assertInstanceOf(Currency::class, $currency);
     }
 
     /**
