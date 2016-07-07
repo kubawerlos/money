@@ -24,10 +24,6 @@ final class Currency
         $this->code = $code;
 
         $this->fractionDigits = $this->getFractionDigitsForCode($this->code);
-
-        if ($this->fractionDigits === null) {
-            throw new InvalidArgumentException();
-        }
     }
 
     /**
@@ -49,6 +45,7 @@ final class Currency
 
     /**
      * @param string $code
+     * @throws InvalidArgumentException
      * @return int
      */
     private function getFractionDigitsForCode($code)
@@ -238,5 +235,7 @@ final class Currency
         if (isset($currencies[$code])) {
             return $currencies[$code];
         };
+
+        throw new InvalidArgumentException();
     }
 }
