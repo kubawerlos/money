@@ -2,7 +2,6 @@
 
 namespace Tests\Money;
 
-use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 use PHPUnit_Framework_TestCase;
 use RangeException;
@@ -23,9 +22,8 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
      */
     public function correctMultiplication($expectedAmount, $baseAmount, $multiplier, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $expectedMoney = new Money($expectedAmount, $currency);
-        $baseMoney = new Money($baseAmount, $currency);
+        $expectedMoney = new Money($expectedAmount, $currencyCode);
+        $baseMoney = new Money($baseAmount, $currencyCode);
 
         $actualMoney = $baseMoney->multiply($multiplier);
 
@@ -59,9 +57,8 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
      */
     public function incorrectMultiplication($expectedAmount, $baseAmount, $multiplier, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $expectedMoney = new Money($expectedAmount, $currency);
-        $baseMoney = new Money($baseAmount, $currency);
+        $expectedMoney = new Money($expectedAmount, $currencyCode);
+        $baseMoney = new Money($baseAmount, $currencyCode);
 
         $actualMoney = $baseMoney->multiply($multiplier);
 
@@ -84,7 +81,7 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
      */
     public function throwRangeExceptionWhenResultIsTooLarge()
     {
-        $money = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
+        $money = new Money((int) (PHP_INT_MAX / 100 - 100), 'USD');
 
         $this->expectException(RangeException::class);
 
@@ -96,7 +93,7 @@ class MultiplicationTest extends PHPUnit_Framework_TestCase
      */
     public function throwRangeExceptionWhenResultIsTooSmall()
     {
-        $money = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
+        $money = new Money((int) (100 - PHP_INT_MAX / 100), 'USD');
 
         $this->expectException(RangeException::class);
 

@@ -2,7 +2,6 @@
 
 namespace Tests\Money;
 
-use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 use PHPUnit_Framework_TestCase;
 
@@ -20,8 +19,7 @@ class GetAmountTest extends PHPUnit_Framework_TestCase
      */
     public function getAmountFormat($expectedAmount, $unitAmount, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $money = new Money($unitAmount, $currency);
+        $money = new Money($unitAmount, $currencyCode);
 
         $amount = $money->getAmount();
 

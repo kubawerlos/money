@@ -2,7 +2,6 @@
 
 namespace Tests\Money;
 
-use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 use PHPUnit_Framework_TestCase;
 
@@ -20,9 +19,8 @@ class IsInTheSameCurrencyTest extends PHPUnit_Framework_TestCase
      */
     public function sameCurrency($amount1, $amount2, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $money1 = new Money($amount1, $currency);
-        $money2 = new Money($amount2, $currency);
+        $money1 = new Money($amount1, $currencyCode);
+        $money2 = new Money($amount2, $currencyCode);
 
         $this->assertTrue($money1->isInTheSameCurrency($money1));
         $this->assertTrue($money1->isInTheSameCurrency($money2));
@@ -51,10 +49,8 @@ class IsInTheSameCurrencyTest extends PHPUnit_Framework_TestCase
      */
     public function notSameCurrency($amount1, $amount2, $currencyCode1, $currencyCode2)
     {
-        $currency1 = new Currency($currencyCode1);
-        $currency2 = new Currency($currencyCode2);
-        $money1 = new Money($amount1, $currency1);
-        $money2 = new Money($amount2, $currency2);
+        $money1 = new Money($amount1, $currencyCode1);
+        $money2 = new Money($amount2, $currencyCode2);
 
         $this->assertFalse($money1->isInTheSameCurrency($money2));
         $this->assertFalse($money2->isInTheSameCurrency($money1));

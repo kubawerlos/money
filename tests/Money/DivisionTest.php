@@ -3,7 +3,6 @@
 namespace Tests\Money;
 
 use InvalidArgumentException;
-use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 use PHPUnit_Framework_TestCase;
 
@@ -23,9 +22,8 @@ class DivisionTest extends PHPUnit_Framework_TestCase
      */
     public function correctMultiplication($expectedAmount, $baseAmount, $divisor, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $expectedMoney = new Money($expectedAmount, $currency);
-        $baseMoney = new Money($baseAmount, $currency);
+        $expectedMoney = new Money($expectedAmount, $currencyCode);
+        $baseMoney = new Money($baseAmount, $currencyCode);
 
         $actualMoney = $baseMoney->divide($divisor);
 
@@ -63,9 +61,8 @@ class DivisionTest extends PHPUnit_Framework_TestCase
      */
     public function incorrectMultiplication($expectedAmount, $baseAmount, $divisor, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $expectedMoney = new Money($expectedAmount, $currency);
-        $baseMoney = new Money($baseAmount, $currency);
+        $expectedMoney = new Money($expectedAmount, $currencyCode);
+        $baseMoney = new Money($baseAmount, $currencyCode);
 
         $actualMoney = $baseMoney->divide($divisor);
 
@@ -88,7 +85,7 @@ class DivisionTest extends PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionWhenDividingByZero()
     {
-        $money = new Money(10, new Currency('USD'));
+        $money = new Money(10, 'USD');
 
         $this->expectException(InvalidArgumentException::class);
 

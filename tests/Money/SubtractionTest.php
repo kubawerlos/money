@@ -3,7 +3,6 @@
 namespace Tests\Money;
 
 use InvalidArgumentException;
-use KubaWerlos\Money\Currency;
 use KubaWerlos\Money\Money;
 use PHPUnit_Framework_TestCase;
 use RangeException;
@@ -24,10 +23,9 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
      */
     public function correctSubtraction($expectedAmount, $baseAmount, $addedAmount, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $expectedMoney = new Money($expectedAmount, $currency);
-        $baseMoney = new Money($baseAmount, $currency);
-        $addedMoney = new Money($addedAmount, $currency);
+        $expectedMoney = new Money($expectedAmount, $currencyCode);
+        $baseMoney = new Money($baseAmount, $currencyCode);
+        $addedMoney = new Money($addedAmount, $currencyCode);
 
         $actualMoney = $baseMoney->subtract($addedMoney);
 
@@ -57,10 +55,9 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
      */
     public function incorrectSubtraction($expectedAmount, $baseAmount, $addedAmount, $currencyCode)
     {
-        $currency = new Currency($currencyCode);
-        $expectedMoney = new Money($expectedAmount, $currency);
-        $baseMoney = new Money($baseAmount, $currency);
-        $addedMoney = new Money($addedAmount, $currency);
+        $expectedMoney = new Money($expectedAmount, $currencyCode);
+        $baseMoney = new Money($baseAmount, $currencyCode);
+        $addedMoney = new Money($addedAmount, $currencyCode);
 
         $actualMoney = $baseMoney->subtract($addedMoney);
 
@@ -85,8 +82,8 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
      */
     public function throwInvalidArgumentExceptionForNotMatchingCurrencies()
     {
-        $moneyEuro = new Money(10, new Currency('EUR'));
-        $moneyDollars = new Money(10, new Currency('USD'));
+        $moneyEuro = new Money(10, 'EUR');
+        $moneyDollars = new Money(10, 'USD');
 
         $this->expectException(InvalidArgumentException::class);
 
@@ -98,8 +95,8 @@ class SubtractionTest extends PHPUnit_Framework_TestCase
      */
     public function throwsRangeExceptionWhenResultIsTooSmall()
     {
-        $moneySmall = new Money((int) (100 - PHP_INT_MAX / 100), new Currency('USD'));
-        $moneyLarge = new Money((int) (PHP_INT_MAX / 100 - 100), new Currency('USD'));
+        $moneySmall = new Money((int) (100 - PHP_INT_MAX / 100), 'USD');
+        $moneyLarge = new Money((int) (PHP_INT_MAX / 100 - 100), 'USD');
 
         $this->expectException(RangeException::class);
 
