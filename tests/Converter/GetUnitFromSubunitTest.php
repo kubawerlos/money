@@ -43,9 +43,9 @@ class GetUnitFromSubunitTest extends PHPUnit_Framework_TestCase
             [ '12.00', 1200, 'USD' ],
             [ '1000.00', 100000, 'USD' ],
             [ '-0.07', -7, 'USD' ],
-            [ '0', 0, 'ITL' ],
-            [ '20', 20, 'ITL' ],
-            [ '-500', -500, 'ITL' ],
+            [ '0', 0, 'JPY' ],
+            [ '20', 20, 'JPY' ],
+            [ '-500', -500, 'JPY' ],
         ];
     }
 
@@ -75,7 +75,7 @@ class GetUnitFromSubunitTest extends PHPUnit_Framework_TestCase
             [ true, 'EUR' ],
             [ 0.0, 'PLN' ],
             [ '10', 'TRY' ],
-            [ '1.99', 'ITL' ],
+            [ '1.99', 'JPY' ],
         ];
     }
 }

@@ -48,8 +48,8 @@ class DivisionTest extends PHPUnit_Framework_TestCase
             [ 8000.01, 16000.02, 2, 'AUD' ],
             [ 321.42, 642.84, 2, 'AUD' ],
             [ 0.01, 0.03, 3, 'AUD' ],
-            [ 2, -8, -4, 'ITL' ],
-            [ 3, 5, 2, 'ITL' ],
+            [ 2, -8, -4, 'JPY' ],
+            [ 3, 5, 2, 'JPY' ],
         ];
     }
 

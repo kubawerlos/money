@@ -37,7 +37,7 @@ class IsInTheSameCurrencyTest extends PHPUnit_Framework_TestCase
         return [
             [ 10, 50, 'USD' ],
             [ 5.5, 200, 'EUR' ],
-            [ 6, -800, 'ITL' ],
+            [ 6, -800, 'JPY' ],
         ];
     }
 
@@ -68,7 +68,7 @@ class IsInTheSameCurrencyTest extends PHPUnit_Framework_TestCase
         return [
             [ 10, 10, 'USD', 'EUR' ],
             [ 100, 100, 'USD', 'EUR' ],
-            [ 55, -3, 'ITL', 'TRY' ],
+            [ 55, -3, 'JPY', 'TRY' ],
         ];
     }
 }

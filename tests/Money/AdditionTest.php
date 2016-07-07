@@ -46,7 +46,7 @@ class AdditionTest extends PHPUnit_Framework_TestCase
             [ 26.60, 16.40, 10.20, 'PLN' ],
             [ 38.30, 46.40, -8.10, 'TRY' ],
             [ 0, -8.00, 8, 'AUD' ],
-            [ 4, 6, -2, 'ITL' ],
+            [ 4, 6, -2, 'JPY' ],
         ];
     }
 

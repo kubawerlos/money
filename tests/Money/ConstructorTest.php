@@ -41,8 +41,8 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
             [ '1000', 'EUR' ],
             [ 1.99, 'PLN' ],
             [ '1.99', 'PLN' ],
-            [ -20, 'ITL' ],
-            [ '-20', 'ITL' ],
+            [ -20, 'JPY' ],
+            [ '-20', 'JPY' ],
             [ -1.3, 'TRY' ],
             [ '-1.3', 'TRY' ],
             [ -1.55, 'TRY' ],
@@ -90,8 +90,8 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
             [ '1,2.3', 'USD' ],
             [ log(0), 'USD' ],
             [ acos(1.01), 'USD' ],
-            [ '0.5', 'ITL' ],
-            [ '2.', 'ITL' ],
+            [ '0.5', 'JPY' ],
+            [ '2.', 'JPY' ],
         ];
     }
 }

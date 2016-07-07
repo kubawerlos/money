@@ -43,9 +43,9 @@ class GetSubunitFromUnitTest extends PHPUnit_Framework_TestCase
             [ -105500, '-1055', 'USD' ],
             [ -255, '-2.55', 'USD' ],
             [ 10000000, '100000', 'USD' ],
-            [ 0, '0', 'ITL' ],
-            [ 20, '20', 'ITL' ],
-            [ -500, '-500', 'ITL' ],
+            [ 0, '0', 'JPY' ],
+            [ 20, '20', 'JPY' ],
+            [ -500, '-500', 'JPY' ],
         ];
     }
 
@@ -91,9 +91,9 @@ class GetSubunitFromUnitTest extends PHPUnit_Framework_TestCase
             [ '1,2.3', 'USD' ],
             [ log(0), 'USD' ],
             [ acos(1.01), 'USD' ],
-            [ '0.5', 'ITL' ],
-            [ '2.', 'ITL' ],
-            [ '--4', 'ITL' ],
+            [ '0.5', 'JPY' ],
+            [ '2.', 'JPY' ],
+            [ '--4', 'JPY' ],
         ];
     }
 }

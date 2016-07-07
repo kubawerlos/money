@@ -41,9 +41,9 @@ class GetAmountTest extends PHPUnit_Framework_TestCase
             [ '-5.00', -5, 'USD'],
             [ '-2.55', '-2.55', 'USD'],
             [ '1000.00', 1000, 'USD'],
-            [ '0', '0', 'ITL'],
-            [ '20', 20, 'ITL'],
-            [ '-7', -7, 'ITL'],
+            [ '0', '0', 'JPY'],
+            [ '20', 20, 'JPY'],
+            [ '-7', -7, 'JPY'],
         ];
     }
 }
