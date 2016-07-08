@@ -30,9 +30,7 @@ final class Money
      */
     public function getAmount()
     {
-        $converter = new Converter($this->currency);
-
-        return $converter->getUnitFromSubunit($this->subunitAmount);
+        return (new Converter($this->currency))->getUnitFromSubunit($this->subunitAmount);
     }
 
     /**
@@ -41,8 +39,7 @@ final class Money
      */
     public function isEqual(self $money)
     {
-        return $this->isInTheSameCurrency($money)
-            && $this->subunitAmount === $money->subunitAmount;
+        return $this->isInTheSameCurrency($money) && $this->subunitAmount === $money->subunitAmount;
     }
 
     /**

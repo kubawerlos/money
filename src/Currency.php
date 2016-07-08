@@ -10,7 +10,7 @@ final class Currency
     private $code;
 
     /** @var int */
-    private $fractionDigits = null;
+    private $fractionDigits;
 
     /**
      * @param string $code
@@ -18,16 +18,8 @@ final class Currency
      */
     public function __construct($code)
     {
+        $this->fractionDigits = $this->getFractionDigitsForCode($code);
         $this->code = $code;
-        $this->fractionDigits = $this->getFractionDigitsForCode($this->code);
-    }
-
-    /**
-     * @return int
-     */
-    public function getFractionDigits()
-    {
-        return $this->fractionDigits;
     }
 
     /**
@@ -36,6 +28,14 @@ final class Currency
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFractionDigits()
+    {
+        return $this->fractionDigits;
     }
 
     /**

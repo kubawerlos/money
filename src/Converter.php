@@ -51,7 +51,7 @@ class Converter
             throw new InvalidArgumentException();
         }
 
-        return $this->getSubunitFromUnitString($unitAmount);
+        return $this->getSubunitFromStringUnit($unitAmount);
     }
 
     /**
@@ -59,9 +59,9 @@ class Converter
      * @throws InvalidArgumentException
      * @return int
      */
-    private function getSubunitFromUnitString($unitAmountString)
+    private function getSubunitFromStringUnit($unitAmountString)
     {
-        if (!$this->isValidUnitAmountString($unitAmountString)) {
+        if (!$this->isValidUnitAmount($unitAmountString)) {
             throw new InvalidArgumentException();
         }
 
@@ -72,12 +72,12 @@ class Converter
      * @param string $unitAmount
      * @return bool
      */
-    private function isValidUnitAmountString($unitAmount)
+    private function isValidUnitAmount($unitAmount)
     {
-        $fractionsPart = $this->currency->getFractionDigits() > 0
+        $fractionDigits = $this->currency->getFractionDigits() > 0
             ? sprintf('(\.\d{1,%d})?', $this->currency->getFractionDigits())
             : '';
 
-        return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionsPart), $unitAmount) > 0;
+        return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionDigits), $unitAmount) > 0;
     }
 }
