@@ -95,7 +95,7 @@ final class Currency
 
         if (is_string($code) && isset($currencies[$code])) {
             return $currencies[$code];
-        };
+        }
 
         throw new InvalidArgumentException();
     }

@@ -57,7 +57,9 @@ class ConstructorTest extends PHPUnit_Framework_TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new Money($amount, $currencyCode);
+        $money = new Money($amount, $currencyCode);
+
+        $this->assertNotInstanceOf(Money::class, $money);
     }
 
     /**
