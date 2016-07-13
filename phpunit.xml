@@ -26,9 +26,9 @@
     </testsuites>
 
     <logging>
-        <log type='coverage-clover' target='./tests-results/clover.xml' />
-        <log type='coverage-html' target='./tests-results/' lowUpperBound='75' highLowerBound='100' />
-        <log type='junit' target='./tests-results/junit.xml' logIncompleteSkipped='false' />
+        <log type='coverage-clover' target='./.reports/clover.xml' />
+        <log type='coverage-html' target='./.reports/' lowUpperBound='75' highLowerBound='100' />
+        <log type='junit' target='./.reports/junit.xml' logIncompleteSkipped='false' />
     </logging>
 
     <filter>

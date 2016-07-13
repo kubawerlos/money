@@ -4,7 +4,7 @@ build:
             -
                 command: 'composer require phpunit/phpunit && vendor/bin/phpunit'
                 coverage:
-                    file: 'tests-results/clover.xml'
+                    file: '.reports/clover.xml'
                     format: 'php-clover'
 
 checks:

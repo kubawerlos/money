@@ -1,5 +1,5 @@
 install:
-    - composer install --prefer-source
+    - composer install
     - composer require --dev phpunit/phpunit squizlabs/php_codesniffer
 
 language: php
