@@ -102,7 +102,7 @@ class MoneyTest extends TestCase
 
     public function testCalculationGoingOutOfRange()
     {
-        $money = new Money(floor(PHP_INT_MAX / 100), 'USD');
+        $money = new Money((int) (PHP_INT_MAX / 100 - 100), 'USD');
         $this->expectException(\RangeException::class);
         $money->multiply(1000);
     }
