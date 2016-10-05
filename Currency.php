@@ -2,57 +2,79 @@
 
 namespace KubaWerlos\Money;
 
-use InvalidArgumentException;
-
 final class Currency
 {
-    /** @var string */
     private $code;
 
-    /** @var int */
     private $fractionDigits;
 
-    /**
-     * @param string $code
-     * @throws InvalidArgumentException
-     */
-    public function __construct($code)
+    public function __construct(string $code)
     {
-        $this->fractionDigits = $this->getFractionDigitsForCode($code);
         $this->code = $code;
+        $this->fractionDigits = $this->getFractionDigitsForCode($this->code);
     }
 
-    /**
-     * @return string
-     */
-    public function getCode()
+    public function getCode() : string
     {
         return $this->code;
     }
 
-    /**
-     * @return int
-     */
-    public function getFractionDigits()
+    public function getFractionDigits() : int
     {
         return $this->fractionDigits;
     }
 
-    /**
-     * @param Currency $currency
-     * @return bool
-     */
-    public function isEqual(self $currency)
+    public function isEqual(self $currency) : bool
     {
         return $this->code === $currency->code;
     }
 
-    /**
-     * @param string $code
-     * @throws InvalidArgumentException
-     * @return int
-     */
-    private function getFractionDigitsForCode($code)
+    public function getUnitAmountForSubunitAmount(int $subunitAmount) : string
+    {
+        return number_format(
+            $subunitAmount / pow(10, $this->getFractionDigits()),
+            $this->getFractionDigits(),
+            '.',
+            ''
+        );
+    }
+
+    public function getSubunitAmountForUnitAmount($unitAmount) : int
+    {
+        if (is_float($unitAmount) || is_int($unitAmount)) {
+            $unitAmount = (string) $unitAmount;
+        }
+
+        if (!is_string($unitAmount)) {
+            throw new \InvalidArgumentException('Amount must be float, integer or string');
+        }
+
+        return $this->getSubunitForStringUnit($unitAmount);
+    }
+
+    private function getSubunitForStringUnit(string $unitAmount) : int
+    {
+        if (!$this->isValidUnitAmount($unitAmount)) {
+            throw new \InvalidArgumentException('Amount is invalid for this currency');
+        }
+
+        $subunitAmount = pow(10, $this->getFractionDigits()) * $unitAmount;
+
+        if ($subunitAmount < PHP_INT_MIN || PHP_INT_MAX < $subunitAmount) {
+            throw new \RangeException('Subunit is out of integer range');
+        }
+
+        return $subunitAmount;
+    }
+
+    private function isValidUnitAmount(string $unitAmount) : bool
+    {
+        $fractionDigits = $this->getFractionDigits() > 0 ? sprintf('(\.\d{1,%d})?', $this->getFractionDigits()) : '';
+
+        return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionDigits), $unitAmount) > 0;
+    }
+
+    private function getFractionDigitsForCode(string $code) : int
     {
         $currencies = [
             'AED' => 2, 'AFN' => 2, 'ALL' => 2, 'AMD' => 2, 'ANG' => 2,
@@ -97,6 +119,6 @@ final class Currency
             return $currencies[$code];
         }
 
-        throw new InvalidArgumentException();
+        throw new \InvalidArgumentException("Currency $code is invalid");
     }
 }

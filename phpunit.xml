@@ -3,6 +3,7 @@
          backupStaticAttributes='false'
          beStrictAboutTestsThatDoNotTestAnything='true'
          bootstrap='vendor/autoload.php'
+         colors='true'
          convertErrorsToExceptions='true'
          convertNoticesToExceptions='true'
          convertWarningsToExceptions='true'
@@ -10,7 +11,8 @@
          stopOnFailure='false'
          stopOnIncomplete='false'
          stopOnSkipped='false'
-         verbose='true'>
+         verbose='true'
+>
 
     <php>
         <ini name='display_errors' value='1' />
@@ -33,7 +35,8 @@
 
     <filter>
         <whitelist>
-            <directory>./src</directory>
+            <file>./Currency.php</file>
+            <file>./Money.php</file>
         </whitelist>
     </filter>
 
