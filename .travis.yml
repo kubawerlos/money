@@ -13,6 +13,6 @@ php:
 
 script:
     - ./vendor/bin/phpunit --no-coverage
-    - ./vendor/bin/phpcs --extensions=php --report-full --standard=PSR2 ./src/
+    - ./vendor/bin/phpcs --extensions=php --report-full --standard=PSR2 .
 
 sudo: false
