@@ -29,14 +29,11 @@
 
     <logging>
         <log type='coverage-clover' target='./.reports/clover.xml' />
-        <log type='coverage-html' target='./.reports/' lowUpperBound='75' highLowerBound='100' />
-        <log type='junit' target='./.reports/junit.xml' logIncompleteSkipped='false' />
     </logging>
 
     <filter>
         <whitelist>
-            <file>./Currency.php</file>
-            <file>./Money.php</file>
+            <directory>./src</directory>
         </whitelist>
     </filter>
 
