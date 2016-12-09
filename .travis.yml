@@ -1,5 +1,11 @@
-install:
-    - composer require --dev phpunit/phpunit squizlabs/php_codesniffer
+git:
+    depth: 1
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+sudo: false
 
 language: php
 
@@ -7,12 +13,18 @@ notifications:
     email: false
 
 php:
-    - 7.0
-    - 7.1
-    - nightly
+    - '7.0'
+    - '7.1'
+    - 'nightly'
+
+before_install:
+    - (phpenv config-rm xdebug.ini || exit 0)
+    - composer self-update
+
+install:
+    - composer require --dev phpunit/phpunit squizlabs/php_codesniffer
 
 script:
-    - ./vendor/bin/phpunit
-    - ./vendor/bin/phpcs --extensions=php --report-full --standard=PSR2 ./src/
+    - vendor/bin/phpcs --report-full --standard=PSR2 src tests
+    - phpdbg -qrr vendor/bin/phpunit -c tests/phpunit.xml
 
-sudo: false

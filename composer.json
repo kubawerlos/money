@@ -1,7 +1,7 @@
 {
     "name": "kubawerlos/money",
     "type": "library",
-    "description": "Simple implementation of Money Value Object",
+    "description": "Simple PHP implementation of Money Value Object",
     "license": "MIT",
     "authors": [
         {

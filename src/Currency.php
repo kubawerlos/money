@@ -14,22 +14,22 @@ final class Currency
         $this->fractionDigits = $this->getFractionDigitsForCode($this->code);
     }
 
-    public function getCode() : string
+    public function getCode(): string
     {
         return $this->code;
     }
 
-    public function getFractionDigits() : int
+    public function getFractionDigits(): int
     {
         return $this->fractionDigits;
     }
 
-    public function isEqual(self $currency) : bool
+    public function isEqual(self $currency): bool
     {
         return $this->code === $currency->code;
     }
 
-    public function getUnitAmountForSubunitAmount(int $subunitAmount) : string
+    public function getUnitAmountForSubunitAmount(int $subunitAmount): string
     {
         return number_format(
             $subunitAmount / pow(10, $this->getFractionDigits()),
@@ -39,7 +39,7 @@ final class Currency
         );
     }
 
-    public function getSubunitAmountForUnitAmount($unitAmount) : int
+    public function getSubunitAmountForUnitAmount($unitAmount): int
     {
         if (is_float($unitAmount) || is_int($unitAmount)) {
             $unitAmount = (string) $unitAmount;
@@ -52,7 +52,7 @@ final class Currency
         return $this->getSubunitForStringUnit($unitAmount);
     }
 
-    private function getSubunitForStringUnit(string $unitAmount) : int
+    private function getSubunitForStringUnit(string $unitAmount): int
     {
         if (!$this->isValidUnitAmount($unitAmount)) {
             throw new \InvalidArgumentException('Amount is invalid for this currency');
@@ -67,14 +67,14 @@ final class Currency
         return $subunitAmount;
     }
 
-    private function isValidUnitAmount(string $unitAmount) : bool
+    private function isValidUnitAmount(string $unitAmount): bool
     {
         $fractionDigits = $this->getFractionDigits() > 0 ? sprintf('(\.\d{1,%d})?', $this->getFractionDigits()) : '';
 
         return preg_match(sprintf('/(?=^-?\d+%s$)(?!^-?0\d+)/', $fractionDigits), $unitAmount) > 0;
     }
 
-    private function getFractionDigitsForCode(string $code) : int
+    private function getFractionDigitsForCode(string $code): int
     {
         $currencies = [
             'AED' => 2, 'AFN' => 2, 'ALL' => 2, 'AMD' => 2, 'ANG' => 2,

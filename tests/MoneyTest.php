@@ -6,7 +6,7 @@ use KubaWerlos\Money\Money;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers KubaWerlos\Money\Money
+ * @covers \KubaWerlos\Money\Money
  */
 class MoneyTest extends TestCase
 {

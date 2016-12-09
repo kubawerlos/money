@@ -6,7 +6,7 @@ use KubaWerlos\Money\Currency;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers KubaWerlos\Money\Currency
+ * @covers \KubaWerlos\Money\Currency
  */
 class CurrencyTest extends TestCase
 {
@@ -103,7 +103,7 @@ class CurrencyTest extends TestCase
         $this->assertSame($fractionDigits, $currency->getFractionDigits());
     }
 
-    public function getFractionDigitsProvider() : array
+    public function getFractionDigitsProvider(): array
     {
         $xml = simplexml_load_file('http://www.currency-iso.org/dam/downloads/lists/list_one.xml');
 
@@ -111,7 +111,7 @@ class CurrencyTest extends TestCase
 
         foreach ($xml->CcyTbl->children() as $child) {
             if (!empty($child->Ccy)) {
-                $currencies[] = [strval($child->Ccy), intval($child->CcyMnrUnts)];
+                $currencies[] = [(string) ($child->Ccy), (int) ($child->CcyMnrUnts)];
             }
         }
 

@@ -4,9 +4,9 @@ build:
     tests:
         override:
             -
-                command: 'composer require phpunit/phpunit && vendor/bin/phpunit'
+                command: 'composer require --dev phpunit/phpunit && phpdbg -qrr vendor/bin/phpunit -c tests/phpunit.xml'
                 coverage:
-                    file: '.reports/clover.xml'
+                    file: 'tests/coverage.xml'
                     format: 'php-clover'
 
 checks:
